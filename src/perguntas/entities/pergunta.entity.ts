@@ -31,7 +31,7 @@ export class Pergunta implements IPergunta {
     nullable: false,
     onDelete: 'CASCADE',
   })
-  materia: string;
+  materia: Materia;
 
   @OneToMany(() => Alternativa, (alternativa) => alternativa.pergunta, {
     cascade: true,

@@ -29,5 +29,5 @@ export class Alternativa implements IAlternativa {
     nullable: false,
     onDelete: 'CASCADE',
   })
-  pergunta: string;
+  pergunta: Pergunta;
 }

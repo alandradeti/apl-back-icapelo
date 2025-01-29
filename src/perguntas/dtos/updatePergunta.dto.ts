@@ -3,7 +3,7 @@ import { CreatePerguntaDto } from './createPergunta.dto';
 import { ApiProperty } from '@nestjs/swagger';
 import { IAlternativa } from 'src/alternativas/entities/interfaces/alternativa.entity.interface';
 import { IProva } from 'src/provas/entities/interfaces/prova.entity.interface';
-import { IsUUID } from 'class-validator';
+import { IMateria } from 'src/materias/entities/interfaces/materia.entity.interface';
 
 export class UpdatePerguntaDto extends PartialType(CreatePerguntaDto) {
   @ApiProperty({
@@ -17,7 +17,7 @@ export class UpdatePerguntaDto extends PartialType(CreatePerguntaDto) {
     example: 'af67065b-23c0-4ee4-ac83-79a8dcfe284d',
     required: true,
   })
-  materia?: string;
+  materia?: IMateria;
 
   @ApiProperty({
     description: 'IDs das alternativas relacionadas à pergunta',

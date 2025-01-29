@@ -5,6 +5,7 @@ import {
   IsBoolean,
   IsUUID,
 } from 'class-validator';
+import { IPergunta } from 'src/perguntas/entities/interfaces/pergunta.entity.interface';
 
 export class CreateAlternativaDto {
   @IsNotEmpty()
@@ -30,5 +31,5 @@ export class CreateAlternativaDto {
     example: '550e8400-e29b-41d4-a716-446655440000',
     required: true,
   })
-  pergunta: string;
+  pergunta: IPergunta;
 }
