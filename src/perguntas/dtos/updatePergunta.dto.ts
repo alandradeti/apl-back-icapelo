@@ -4,6 +4,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IAlternativa } from 'src/alternativas/entities/interfaces/alternativa.entity.interface';
 import { IProva } from 'src/provas/entities/interfaces/prova.entity.interface';
 import { IMateria } from 'src/materias/entities/interfaces/materia.entity.interface';
+import { Dificuldade } from '../enums/pergunta.enum';
 
 export class UpdatePerguntaDto extends PartialType(CreatePerguntaDto) {
   @ApiProperty({
@@ -18,6 +19,13 @@ export class UpdatePerguntaDto extends PartialType(CreatePerguntaDto) {
     required: true,
   })
   materia?: IMateria;
+
+  @ApiProperty({
+    description: 'Dificuldade da pergunta',
+    example: Dificuldade.FACIL,
+    required: true,
+  })
+  dificuldade: Dificuldade;
 
   @ApiProperty({
     description: 'IDs das alternativas relacionadas à pergunta',

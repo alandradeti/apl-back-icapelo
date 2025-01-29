@@ -1,8 +1,15 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsOptional, IsString, IsUUID } from 'class-validator';
+import {
+  IsEnum,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  IsUUID,
+} from 'class-validator';
 import { IAlternativa } from 'src/alternativas/entities/interfaces/alternativa.entity.interface';
 import { IMateria } from 'src/materias/entities/interfaces/materia.entity.interface';
 import { IProva } from 'src/provas/entities/interfaces/prova.entity.interface';
+import { Dificuldade } from '../enums/pergunta.enum';
 
 export class CreatePerguntaDto {
   @IsNotEmpty()
@@ -14,6 +21,15 @@ export class CreatePerguntaDto {
   enunciado: string;
 
   @IsNotEmpty()
+  @IsEnum(Dificuldade)
+  @ApiProperty({
+    description: 'Dificuldade da pergunta',
+    example: Dificuldade.FACIL,
+    required: true,
+  })
+  dificuldade: Dificuldade;
+
+  @IsNotEmpty()
   @IsUUID()
   @ApiProperty({
     description: 'ID da matéria relacionada à pergunta',
@@ -23,8 +39,6 @@ export class CreatePerguntaDto {
   materia: IMateria;
 
   @IsOptional()
-  // @ValidateNested()
-  // @Type(() => CreateMateriaDto)
   @ApiProperty({
     description: 'IDs das alternativas relacionadas à pergunta',
     example: [

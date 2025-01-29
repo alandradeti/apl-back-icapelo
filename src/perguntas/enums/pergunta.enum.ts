@@ -1,0 +1,7 @@
+export enum Dificuldade {
+  MUITO_FACIL = 'MUITO_FACIL',
+  FACIL = 'FACIL',
+  MEDIA = 'MEDIA',
+  DIFICIL = 'DIFICIL',
+  MUITO_DIFICIL = 'MUITO_DIFICIL',
+}
