@@ -1,9 +1,7 @@
 import {
   Column,
   Entity,
-  JoinColumn,
   ManyToMany,
-  ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
@@ -44,8 +42,6 @@ export class Materia implements IMateria {
   @ManyToMany(() => Professor, (professor) => professor.materias)
   professores?: Professor[];
 
-  @OneToMany(() => Prova, (prova) => prova.materia, {
-    cascade: true,
-  })
+  @OneToMany(() => Prova, (prova) => prova.materia)
   provas?: Prova[];
 }

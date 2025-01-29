@@ -27,6 +27,7 @@ export class Alternativa implements IAlternativa {
 
   @ManyToOne(() => Pergunta, (pergunta) => pergunta.alternativas, {
     nullable: false,
+    onDelete: 'CASCADE',
   })
   pergunta: Pergunta;
 }

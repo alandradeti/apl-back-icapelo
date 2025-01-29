@@ -1,16 +1,17 @@
 import { Aluno } from 'src/alunos/entities/aluno.entity';
 import { Materia } from 'src/materias/entities/materia.entity';
 import { Professor } from 'src/professores/entities/professor.entity';
-import { ProvaPergunta } from 'src/provaPerguntas/entities/provaPergunta.entity';
 import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
   ManyToOne,
   ManyToMany,
-  OneToMany,
+  JoinTable,
 } from 'typeorm';
 import { IProva } from './interfaces/prova.entity.interface';
+import { IPergunta } from 'src/perguntas/entities/interfaces/pergunta.entity.interface';
+import { Pergunta } from 'src/perguntas/entities/pergunta.entity';
 
 @Entity('prova')
 export class Prova implements IProva {
@@ -41,8 +42,9 @@ export class Prova implements IProva {
   })
   professores: Professor[];
 
-  @OneToMany(() => ProvaPergunta, (provaPergunta) => provaPergunta.pergunta, {
+  @ManyToMany(() => Pergunta, (pergunta) => pergunta.provas, {
     nullable: false,
   })
-  provaPerguntas: ProvaPergunta[];
+  @JoinTable()
+  perguntas: IPergunta[];
 }

@@ -29,7 +29,7 @@ import { PerguntaModule } from './perguntas/pergunta.module';
     PerguntaModule,
     AlternativaModule,
   ],
-  controllers: [AppController], 
+  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}

@@ -3,12 +3,13 @@ import { Materia } from 'src/materias/entities/materia.entity';
 import {
   Column,
   Entity,
+  ManyToMany,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { IPergunta } from './interfaces/pergunta.entity.interface';
-import { ProvaPergunta } from 'src/provaPerguntas/entities/provaPergunta.entity';
+import { Prova } from 'src/provas/entities/prova.entity';
 
 @Entity({
   name: 'pergunta',
@@ -28,14 +29,15 @@ export class Pergunta implements IPergunta {
 
   @ManyToOne(() => Materia, (materia) => materia.perguntas, {
     nullable: false,
+    onDelete: 'CASCADE',
   })
-  materia: Materia;
+  materia: string;
 
   @OneToMany(() => Alternativa, (alternativa) => alternativa.pergunta, {
     cascade: true,
   })
   alternativas?: Alternativa[];
 
-  @OneToMany(() => ProvaPergunta, (provaPergunta) => provaPergunta.pergunta)
-  provaPerguntas?: ProvaPergunta[];
+  @ManyToMany(() => Prova, (prova) => prova.perguntas)
+  provas?: Prova[];
 }

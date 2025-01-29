@@ -7,51 +7,24 @@ import { IMateria } from '../entities/interfaces/materia.entity.interface';
 import { CreateMateriaDto } from '../dtos/createMateria.dto';
 import { UpdateMateriaDto } from '../dtos/updateMateria.dto';
 import { MateriaRepository } from '../repositories/materia.repository';
+import { FindOptionsRelations } from 'typeorm';
+import { Materia } from '../entities/materia.entity';
 
 @Injectable()
 export class MateriaService {
   constructor(private readonly materiaRepository: MateriaRepository) {}
 
-  async findAll(limit: number, page: number): Promise<IMateria[]> {
+  async findAll(limit: number, page: number, populateOptions: FindOptionsRelations<Materia> = {}): Promise<IMateria[]> {
     try {
-      return await this.materiaRepository.findAll(limit, page);
+      return await this.materiaRepository.findAll(limit, page, populateOptions);
     } catch (error) {
       throw new InternalServerErrorException('Erro ao buscar matérias.');
     }
   }
 
-  async findAllWithEntities(limit: number, page: number): Promise<IMateria[]> {
+  async findById(id: string, populateOptions: FindOptionsRelations<Materia> = {}): Promise<IMateria> {
     try {
-      const populateOptions = { perguntas: true };
-      return await this.materiaRepository.findAllWithEntities(
-        limit,
-        page,
-        populateOptions,
-      );
-    } catch (error) {
-      throw new NotFoundException('Erro ao buscar matérias.');
-    }
-  }
-
-  async findByIdWithEntities(id: string): Promise<IMateria> {
-    try {
-      const populateOptions = { perguntas: true };
-      const alternativa = await this.materiaRepository.findByIdWithEntities(
-        id,
-        populateOptions,
-      );
-      if (!alternativa) {
-        throw new NotFoundException('Matéria não encontrada!');
-      }
-      return alternativa;
-    } catch (error) {
-      throw new NotFoundException('Matéria não encontrada!');
-    }
-  }
-
-  async findById(id: string): Promise<IMateria> {
-    try {
-      const materia = await this.materiaRepository.findById(id);
+      const materia = await this.materiaRepository.findById(id, populateOptions);
       if (!materia) {
         throw new NotFoundException('Matéria não encontrada!');
       }

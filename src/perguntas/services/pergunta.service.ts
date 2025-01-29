@@ -7,51 +7,24 @@ import { CreatePerguntaDto } from 'src/perguntas/dtos/createPergunta.dto';
 import { UpdatePerguntaDto } from 'src/perguntas/dtos/updatePergunta.dto';
 import { PerguntaRepository } from 'src/perguntas/repositories/pergunta.repository';
 import { IPergunta } from '../entities/interfaces/pergunta.entity.interface';
+import { Pergunta } from '../entities/pergunta.entity';
+import { FindOptionsRelations } from 'typeorm';
 
 @Injectable()
 export class PerguntaService {
   constructor(private readonly perguntaRepository: PerguntaRepository) {}
 
-  async findAll(limit: number, page: number): Promise<IPergunta[]> {
+  async findAll(limit: number, page: number, populateOptions: FindOptionsRelations<Pergunta> = {}): Promise<IPergunta[]> {
     try {
-      return await this.perguntaRepository.findAll(limit, page);
+      return await this.perguntaRepository.findAll(limit, page, populateOptions);
     } catch (error) {
       throw new InternalServerErrorException('Erro ao buscar perguntas.');
     }
   }
 
-  async findAllWithEntities(limit: number, page: number): Promise<IPergunta[]> {
+  async findById(id: string, populateOptions: FindOptionsRelations<Pergunta> = {}): Promise<IPergunta> {
     try {
-      const populateOptions = { alternativas: true };
-      return await this.perguntaRepository.findAllWithEntities(
-        limit,
-        page,
-        populateOptions,
-      );
-    } catch (error) {
-      throw new NotFoundException('Erro ao buscar perguntas.');
-    }
-  }
-
-  async findByIdWithEntities(id: string): Promise<IPergunta> {
-    try {
-      const populateOptions = { alternativas: true };
-      const alternativa = await this.perguntaRepository.findByIdWithEntities(
-        id,
-        populateOptions,
-      );
-      if (!alternativa) {
-        throw new NotFoundException('Pergunta não encontrada!');
-      }
-      return alternativa;
-    } catch (error) {
-      throw new NotFoundException('Pergunta não encontrada!');
-    }
-  }
-
-  async findById(id: string): Promise<IPergunta> {
-    try {
-      const pergunta = await this.perguntaRepository.findById(id);
+      const pergunta = await this.perguntaRepository.findById(id, populateOptions);
       if (!pergunta) {
         throw new NotFoundException('Pergunta não encontrada!');
       }

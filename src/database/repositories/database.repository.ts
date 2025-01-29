@@ -11,7 +11,7 @@ import { IDatabaseRepository } from './interfaces/database.repository.interface'
 export class DatabaseRepository<T> implements IDatabaseRepository<T> {
   constructor(private readonly repository: Repository<T>) {}
 
-  async findAllWithEntities(
+  async findAll(
     limit: number,
     page: number,
     populateOptions: FindOptionsRelations<T>,
@@ -24,26 +24,12 @@ export class DatabaseRepository<T> implements IDatabaseRepository<T> {
     });
   }
 
-  async findByIdWithEntities(
+  async findById(
     id: string,
     populateOptions: FindOptionsRelations<T>,
   ): Promise<T | null> {
     return await this.repository.findOne({
       relations: populateOptions,
-      where: { id } as unknown as FindOptionsWhere<T>,
-    });
-  }
-
-  async findAll(limit: number, page: number): Promise<T[]> {
-    const skip = (page - 1) * limit;
-    return await this.repository.find({
-      take: limit,
-      skip: skip,
-    });
-  }
-
-  async findById(id: string): Promise<T | null> {
-    return await this.repository.findOne({
       where: { id } as unknown as FindOptionsWhere<T>,
     });
   }

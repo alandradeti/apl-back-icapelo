@@ -22,7 +22,7 @@ import { UpdateAlternativaDto } from '../dtos/updateAlternativa.dto';
 import { Alternativa } from '../entities/alternativa.entity';
 import { IAlternativa } from '../entities/interfaces/alternativa.entity.interface';
 @ApiTags('Alternativas')
-@Controller('alternativas')
+@Controller('alternativa')
 export class AlternativaController {
   constructor(private readonly alternativaService: AlternativaService) {}
 
@@ -66,7 +66,8 @@ export class AlternativaController {
     @Query('limite') limite: number,
     @Query('pagina') pagina: number,
   ): Promise<IAlternativa[]> {
-    return this.alternativaService.findAllWithEntities(limite, pagina);
+    const populateOptions = { pergunta: true };
+    return this.alternativaService.findAll(limite, pagina, populateOptions);
   }
 
   @ApiOperation({ summary: 'Busca uma alternativa com a pergunta pelo ID' })
@@ -80,7 +81,8 @@ export class AlternativaController {
   async findByIdWithEntities(
     @Param('id') id: string,
   ): Promise<IAlternativa | null> {
-    return this.alternativaService.findByIdWithEntities(id);
+    const populateOptions = { pergunta: true };
+    return this.alternativaService.findById(id, populateOptions);
   }
 
   @ApiOperation({ summary: 'Lista todas as alternativas' })

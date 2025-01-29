@@ -1,9 +1,9 @@
 import { PartialType } from '@nestjs/mapped-types';
 import { CreatePerguntaDto } from './createPergunta.dto';
 import { ApiProperty } from '@nestjs/swagger';
-import { IMateria } from 'src/materias/entities/interfaces/materia.entity.interface';
 import { IAlternativa } from 'src/alternativas/entities/interfaces/alternativa.entity.interface';
-import { IProvaPergunta } from 'src/provaPerguntas/entities/interfaces/provaPergunta.entity.interface';
+import { IProva } from 'src/provas/entities/interfaces/prova.entity.interface';
+import { IsUUID } from 'class-validator';
 
 export class UpdatePerguntaDto extends PartialType(CreatePerguntaDto) {
   @ApiProperty({
@@ -12,16 +12,13 @@ export class UpdatePerguntaDto extends PartialType(CreatePerguntaDto) {
   })
   enunciado?: string;
 
+  @IsUUID()
   @ApiProperty({
     description: 'ID da matéria relacionada à pergunta',
-    example: {
-      id: '69bb2d45-9880-4db7-b600-4ab044d99572',
-      nome: 'Matemática',
-      descricao: 'A matéria de matemática aborda álgebra e cálculo.',
-    },
-    required: false,
+    example: 'af67065b-23c0-4ee4-ac83-79a8dcfe284d',
+    required: true,
   })
-  materia?: IMateria;
+  materia?: string;
 
   @ApiProperty({
     description: 'IDs das alternativas relacionadas à pergunta',
@@ -42,7 +39,7 @@ export class UpdatePerguntaDto extends PartialType(CreatePerguntaDto) {
   alternativas?: IAlternativa[];
 
   @ApiProperty({
-    description: 'IDs da relação de provas e perguntas',
+    description: 'IDs das provas',
     example: [
       {
         id: 'af67065b-23c0-4ee4-ac83-79a8dcfe284d',
@@ -53,5 +50,5 @@ export class UpdatePerguntaDto extends PartialType(CreatePerguntaDto) {
     ],
     required: false,
   })
-  provaPerguntas?: IProvaPergunta[];
+  provas?: IProva[];
 }

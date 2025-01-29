@@ -8,7 +8,6 @@ import { Professor } from 'src/professores/entities/professor.entity';
 import { Aluno } from 'src/alunos/entities/aluno.entity';
 import { Turma } from 'src/turmas/entities/turma.entity';
 import { Prova } from 'src/provas/entities/prova.entity';
-import { ProvaPergunta } from 'src/provaPerguntas/entities/provaPergunta.entity';
 
 @Module({
   imports: [
@@ -19,7 +18,6 @@ import { ProvaPergunta } from 'src/provaPerguntas/entities/provaPergunta.entity'
     TypeOrmModule.forFeature([Aluno]),
     TypeOrmModule.forFeature([Turma]),
     TypeOrmModule.forFeature([Prova]),
-    TypeOrmModule.forFeature([ProvaPergunta]),
   ],
   providers: [DatabaseRepository],
   exports: [DatabaseRepository, TypeOrmModule],
