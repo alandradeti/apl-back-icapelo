@@ -12,7 +12,6 @@ export class UpdatePerguntaDto extends PartialType(CreatePerguntaDto) {
   })
   enunciado?: string;
 
-  @IsUUID()
   @ApiProperty({
     description: 'ID da matéria relacionada à pergunta',
     example: 'af67065b-23c0-4ee4-ac83-79a8dcfe284d',

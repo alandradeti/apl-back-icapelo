@@ -1,6 +1,5 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
 import { CreateAlternativaDto } from './createAlternativa.dto';
-import { IsUUID } from 'class-validator';
 
 export class UpdateAlternativaDto extends PartialType(CreateAlternativaDto) {
   @ApiProperty({
@@ -17,7 +16,6 @@ export class UpdateAlternativaDto extends PartialType(CreateAlternativaDto) {
   })
   correta?: boolean;
 
-  @IsUUID()
   @ApiProperty({
     description: 'Pergunta relacionada à alternativa (atualização opcional)',
     example: '550e8400-e29b-41d4-a716-446655440000',
