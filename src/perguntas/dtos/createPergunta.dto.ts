@@ -1,10 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import {
-  IsNotEmpty,
-  IsOptional,
-  IsString,
-  IsUUID,
-} from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString, IsUUID } from 'class-validator';
 import { IAlternativa } from 'src/alternativas/entities/interfaces/alternativa.entity.interface';
 import { IMateria } from 'src/materias/entities/interfaces/materia.entity.interface';
 import { IProva } from 'src/provas/entities/interfaces/prova.entity.interface';

@@ -4,7 +4,6 @@ import { ITurma } from 'src/turmas/entities/interfaces/tuma.entity.interface';
 import { Usuario } from 'src/usuarios/entities/usuario.entity';
 
 export interface IProfessor {
-  id?: string;
   matricula: string;
   usuario: Usuario;
   materias: Materia[];

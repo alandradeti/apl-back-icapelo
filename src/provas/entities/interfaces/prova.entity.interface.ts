@@ -4,7 +4,6 @@ import { IPergunta } from 'src/perguntas/entities/interfaces/pergunta.entity.int
 import { IProfessor } from 'src/professores/entities/interfaces/professor.entity.interface';
 
 export interface IProva {
-  id?: string;
   titulo: string;
   materia: IMateria;
   alunos: IAluno[];

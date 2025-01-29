@@ -3,7 +3,6 @@ import { IProfessor } from 'src/professores/entities/interfaces/professor.entity
 import { TipoUsuario } from 'src/usuarios/enums/usuario.enum';
 
 export interface IUsuario {
-  id?: string;
   nome: string;
   email: string;
   senha: string;

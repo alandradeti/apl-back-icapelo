@@ -9,6 +9,7 @@ import { Aluno } from 'src/alunos/entities/aluno.entity';
 import { Turma } from 'src/turmas/entities/turma.entity';
 import { Prova } from 'src/provas/entities/prova.entity';
 import { ConfigModule } from '@nestjs/config';
+import { Usuario } from 'src/usuarios/entities/usuario.entity';
 
 @Module({
   imports: [
@@ -20,7 +21,7 @@ import { ConfigModule } from '@nestjs/config';
       username: process.env.USER_DATABASE,
       password: process.env.PASS_DATABASE,
       database: process.env.NAME_DATABASE,
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      entities: [__dirname + '/../**/*.entity{.ts,.js}'],
       synchronize: process.env.NODE_ENV !== 'production',
       logging: process.env.NODE_ENV === 'development',
       ssl:
@@ -35,8 +36,9 @@ import { ConfigModule } from '@nestjs/config';
     TypeOrmModule.forFeature([Aluno]),
     TypeOrmModule.forFeature([Turma]),
     TypeOrmModule.forFeature([Prova]),
+    TypeOrmModule.forFeature([Usuario]),
   ],
   providers: [DatabaseRepository],
-  exports: [DatabaseRepository, TypeOrmModule],
+  exports: [DatabaseRepository, TypeOrmModule, ConfigModule],
 })
 export class DatabaseModule {}

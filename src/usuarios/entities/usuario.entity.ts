@@ -1,6 +1,5 @@
 import {
   Entity,
-  PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
   UpdateDateColumn,
@@ -12,14 +11,10 @@ import { IsEmail } from 'class-validator';
 import { IUsuario } from './interfaces/usuario.entity.interface';
 import { Aluno } from 'src/alunos/entities/aluno.entity';
 import { Professor } from 'src/professores/entities/professor.entity';
+import { DatabaseEntity } from 'src/database/entities/database.entity';
 
 @Entity('usuario')
-export class Usuario implements IUsuario {
-  @PrimaryGeneratedColumn('uuid', {
-    name: 'id',
-  })
-  id?: string;
-
+export class Usuario extends DatabaseEntity implements IUsuario {
   @Column({
     name: 'nome',
     type: 'varchar',

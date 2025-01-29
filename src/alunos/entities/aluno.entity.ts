@@ -1,23 +1,12 @@
 import { Turma } from 'src/turmas/entities/turma.entity';
 import { Usuario } from 'src/usuarios/entities/usuario.entity';
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  ManyToMany,
-  OneToOne,
-  JoinColumn,
-} from 'typeorm';
+import { Entity, Column, ManyToMany, OneToOne, JoinColumn } from 'typeorm';
 import { IAluno } from './interfaces/aluno.entity.interface';
 import { Prova } from 'src/provas/entities/prova.entity';
+import { DatabaseEntity } from 'src/database/entities/database.entity';
 
 @Entity('aluno')
-export class Aluno implements IAluno {
-  @PrimaryGeneratedColumn('uuid', {
-    name: 'id',
-  })
-  id?: string;
-
+export class Aluno extends DatabaseEntity implements IAluno {
   @Column({
     name: 'matricula',
     type: 'varchar',

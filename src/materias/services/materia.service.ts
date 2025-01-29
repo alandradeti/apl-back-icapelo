@@ -14,7 +14,11 @@ import { Materia } from '../entities/materia.entity';
 export class MateriaService {
   constructor(private readonly materiaRepository: MateriaRepository) {}
 
-  async findAll(limit: number, page: number, populateOptions: FindOptionsRelations<Materia> = {}): Promise<IMateria[]> {
+  async findAll(
+    limit: number,
+    page: number,
+    populateOptions: FindOptionsRelations<Materia> = {},
+  ): Promise<IMateria[]> {
     try {
       return await this.materiaRepository.findAll(limit, page, populateOptions);
     } catch (error) {
@@ -22,9 +26,15 @@ export class MateriaService {
     }
   }
 
-  async findById(id: string, populateOptions: FindOptionsRelations<Materia> = {}): Promise<IMateria> {
+  async findById(
+    id: string,
+    populateOptions: FindOptionsRelations<Materia> = {},
+  ): Promise<IMateria> {
     try {
-      const materia = await this.materiaRepository.findById(id, populateOptions);
+      const materia = await this.materiaRepository.findById(
+        id,
+        populateOptions,
+      );
       if (!materia) {
         throw new NotFoundException('Matéria não encontrada!');
       }
@@ -35,11 +45,7 @@ export class MateriaService {
   }
 
   async create(materia: CreateMateriaDto): Promise<IMateria> {
-    try {
-      return await this.materiaRepository.create(materia);
-    } catch (error) {
-      throw new InternalServerErrorException('Erro ao criar matéria.');
-    }
+    return await this.materiaRepository.create(materia);
   }
 
   async update(id: string, materia: UpdateMateriaDto): Promise<void> {

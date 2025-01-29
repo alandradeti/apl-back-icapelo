@@ -1,16 +1,12 @@
 import { Pergunta } from 'src/perguntas/entities/pergunta.entity';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne } from 'typeorm';
 import { IAlternativa } from './interfaces/alternativa.entity.interface';
+import { DatabaseEntity } from 'src/database/entities/database.entity';
 
 @Entity({
   name: 'alternativa',
 })
-export class Alternativa implements IAlternativa {
-  @PrimaryGeneratedColumn('uuid', {
-    name: 'id',
-  })
-  id?: string;
-
+export class Alternativa extends DatabaseEntity implements IAlternativa {
   @Column({
     name: 'nome',
     type: 'varchar',

@@ -1,25 +1,14 @@
 import { Aluno } from 'src/alunos/entities/aluno.entity';
 import { Materia } from 'src/materias/entities/materia.entity';
 import { Professor } from 'src/professores/entities/professor.entity';
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  ManyToOne,
-  ManyToMany,
-  JoinTable,
-} from 'typeorm';
+import { Entity, Column, ManyToOne, ManyToMany, JoinTable } from 'typeorm';
 import { IProva } from './interfaces/prova.entity.interface';
 import { IPergunta } from 'src/perguntas/entities/interfaces/pergunta.entity.interface';
 import { Pergunta } from 'src/perguntas/entities/pergunta.entity';
+import { DatabaseEntity } from 'src/database/entities/database.entity';
 
 @Entity('prova')
-export class Prova implements IProva {
-  @PrimaryGeneratedColumn('uuid', {
-    name: 'id',
-  })
-  id?: string;
-
+export class Prova extends DatabaseEntity implements IProva {
   @Column({
     name: 'titulo',
     type: 'varchar',

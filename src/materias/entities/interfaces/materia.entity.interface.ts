@@ -3,7 +3,6 @@ import { IProfessor } from 'src/professores/entities/interfaces/professor.entity
 import { IProva } from 'src/provas/entities/interfaces/prova.entity.interface';
 
 export interface IMateria {
-  id?: string;
   nome: string;
   descricao: string;
   perguntas?: IPergunta[];

@@ -1,21 +1,11 @@
 import { Aluno } from 'src/alunos/entities/aluno.entity';
 import { Professor } from 'src/professores/entities/professor.entity';
-import {
-  PrimaryGeneratedColumn,
-  Column,
-  ManyToMany,
-  JoinTable,
-  Entity,
-} from 'typeorm';
+import { Column, ManyToMany, JoinTable, Entity } from 'typeorm';
 import { ITurma } from './interfaces/tuma.entity.interface';
+import { DatabaseEntity } from 'src/database/entities/database.entity';
 
 @Entity('turma')
-export class Turma implements ITurma {
-  @PrimaryGeneratedColumn('uuid', {
-    name: 'id',
-  })
-  id?: string;
-
+export class Turma extends DatabaseEntity implements ITurma {
   @Column({
     name: 'nome',
     type: 'varchar',

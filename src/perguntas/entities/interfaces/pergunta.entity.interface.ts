@@ -3,7 +3,6 @@ import { IMateria } from 'src/materias/entities/interfaces/materia.entity.interf
 import { IProva } from 'src/provas/entities/interfaces/prova.entity.interface';
 
 export interface IPergunta {
-  id?: string;
   enunciado: string;
   materia: IMateria;
   alternativas?: IAlternativa[];
