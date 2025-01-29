@@ -44,12 +44,6 @@ export class Usuario extends DatabaseEntity implements IUsuario {
   })
   tipo: TipoUsuario;
 
-  @CreateDateColumn()
-  created_at: Date;
-
-  @UpdateDateColumn()
-  updated_at: Date;
-
   @OneToOne(() => Aluno, (aluno) => aluno.usuario)
   @JoinColumn()
   aluno?: Aluno;
