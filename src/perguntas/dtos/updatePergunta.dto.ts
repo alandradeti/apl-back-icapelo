@@ -10,22 +10,23 @@ export class UpdatePerguntaDto extends PartialType(CreatePerguntaDto) {
   @ApiProperty({
     description: 'Enunciado da pergunta',
     example: 'Qual é a fórmula da área do círculo?',
+    required: false,
   })
   enunciado?: string;
 
   @ApiProperty({
     description: 'ID da matéria relacionada à pergunta',
     example: 'af67065b-23c0-4ee4-ac83-79a8dcfe284d',
-    required: true,
+    required: false,
   })
   materia?: IMateria;
 
   @ApiProperty({
     description: 'Dificuldade da pergunta',
     example: Dificuldade.FACIL,
-    required: true,
+    required: false,
   })
-  dificuldade: Dificuldade;
+  dificuldade?: Dificuldade;
 
   @ApiProperty({
     description: 'IDs das alternativas relacionadas à pergunta',
