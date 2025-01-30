@@ -66,8 +66,7 @@ export class AlternativaController {
     @Query('limite') limite: number,
     @Query('pagina') pagina: number,
   ): Promise<IAlternativa[]> {
-    const populateOptions = { pergunta: true };
-    return this.alternativaService.findAll(limite, pagina, populateOptions);
+    return this.alternativaService.findAll(limite, pagina, true);
   }
 
   @ApiOperation({ summary: 'Busca uma alternativa com a pergunta pelo ID' })
@@ -81,8 +80,7 @@ export class AlternativaController {
   async findByIdWithEntities(
     @Param('id') id: string,
   ): Promise<IAlternativa | null> {
-    const populateOptions = { pergunta: true };
-    return this.alternativaService.findById(id, populateOptions);
+    return this.alternativaService.findById(id, true);
   }
 
   @ApiOperation({ summary: 'Lista todas as alternativas' })

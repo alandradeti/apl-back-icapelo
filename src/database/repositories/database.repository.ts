@@ -13,7 +13,7 @@ export class DatabaseRepository<T> implements IDatabaseRepository<T> {
   async findAll(
     limit: number,
     page: number,
-    populateOptions: FindOptionsRelations<T>,
+    populateOptions: FindOptionsRelations<T> = {},
   ): Promise<T[]> {
     const skip = (page - 1) * limit;
     return await this.repository.find({
@@ -25,7 +25,7 @@ export class DatabaseRepository<T> implements IDatabaseRepository<T> {
 
   async findById(
     id: string,
-    populateOptions: FindOptionsRelations<T>,
+    populateOptions: FindOptionsRelations<T> = {},
   ): Promise<T | null> {
     return await this.repository.findOne({
       relations: populateOptions,

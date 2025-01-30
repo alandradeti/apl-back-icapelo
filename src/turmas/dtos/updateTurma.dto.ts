@@ -2,6 +2,7 @@ import { ApiProperty, PartialType } from '@nestjs/swagger';
 import { Aluno } from 'src/alunos/entities/aluno.entity';
 import { Professor } from 'src/professores/entities/professor.entity';
 import { CreateTurmaDto } from './createTurma.dto';
+import { PeriodoTurma } from '../enums/turma.enum';
 
 export class UpdateTurmaDto extends PartialType(CreateTurmaDto) {
   @ApiProperty({
@@ -10,6 +11,20 @@ export class UpdateTurmaDto extends PartialType(CreateTurmaDto) {
     required: false,
   })
   nome?: string;
+
+  @ApiProperty({
+    description: 'Ano da turma',
+    example: '2023',
+    required: true,
+  })
+  ano: string;
+
+  @ApiProperty({
+    description: 'Período da turma',
+    example: PeriodoTurma.MATUTINO,
+    required: true,
+  })
+  periodo: PeriodoTurma;
 
   @ApiProperty({
     description: 'IDs dos Alunos relacionados a turma',

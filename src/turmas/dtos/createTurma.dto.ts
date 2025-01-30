@@ -1,7 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsString, IsUUID } from 'class-validator';
+import { IsEnum, IsNotEmpty, IsString, IsUUID, Matches } from 'class-validator';
 import { Aluno } from 'src/alunos/entities/aluno.entity';
 import { Professor } from 'src/professores/entities/professor.entity';
+import { PeriodoTurma } from '../enums/turma.enum';
 
 export class CreateTurmaDto {
   @IsNotEmpty()
@@ -12,6 +13,25 @@ export class CreateTurmaDto {
     required: true,
   })
   nome: string;
+
+  @IsNotEmpty()
+  @IsString({})
+  @Matches(/^\d{4}$/, { message: 'O ano deve ter exatamente 4 dígitos' })
+  @ApiProperty({
+    description: 'Ano da turma',
+    example: '2023',
+    required: true,
+  })
+  ano: string;
+
+  @IsNotEmpty()
+  @IsEnum(PeriodoTurma)
+  @ApiProperty({
+    description: 'Período da turma',
+    example: PeriodoTurma.MATUTINO,
+    required: true,
+  })
+  periodo: PeriodoTurma;
 
   @IsNotEmpty()
   @IsUUID()

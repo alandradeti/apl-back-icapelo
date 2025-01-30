@@ -5,6 +5,6 @@ import { IUsuario } from 'src/usuarios/entities/interfaces/usuario.entity.interf
 export interface IAluno {
   matricula: string;
   usuario: IUsuario;
-  turmas: ITurma[];
+  turmas?: ITurma[];
   provas?: IProva[];
 }

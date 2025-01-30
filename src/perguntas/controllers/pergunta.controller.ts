@@ -93,8 +93,7 @@ export class PerguntaController {
     @Query('limite') limite: number,
     @Query('pagina') pagina: number,
   ): Promise<IPergunta[]> {
-    const populateOptions = { alternativas: true };
-    return this.perguntaService.findAll(limite, pagina, populateOptions);
+    return this.perguntaService.findAll(limite, pagina, true);
   }
 
   @ApiOperation({ summary: 'Busca uma pergunta com as alternativas pelo ID' })
@@ -109,7 +108,7 @@ export class PerguntaController {
     @Param('id') id: string,
   ): Promise<IPergunta | null> {
     const populateOptions = { alternativas: true };
-    return this.perguntaService.findById(id, populateOptions);
+    return this.perguntaService.findById(id, true);
   }
 
   @ApiOperation({ summary: 'Busca uma pergunta pelo ID' })

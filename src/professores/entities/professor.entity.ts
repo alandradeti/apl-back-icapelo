@@ -36,7 +36,7 @@ export class Professor extends DatabaseEntity implements IProfessor {
   @ManyToMany(() => Turma, (turma) => turma.professores, {
     nullable: false,
   })
-  turmas: Turma[];
+  turmas?: Turma[];
 
   @OneToMany(() => Prova, (prova) => prova.professores)
   provas?: Prova[];

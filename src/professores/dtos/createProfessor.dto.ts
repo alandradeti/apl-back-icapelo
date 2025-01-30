@@ -3,7 +3,7 @@ import { Usuario } from 'src/usuarios/entities/usuario.entity';
 import { Turma } from 'src/turmas/entities/turma.entity';
 import { Prova } from 'src/provas/entities/prova.entity';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsString, IsUUID } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString, IsUUID } from 'class-validator';
 
 export class CreateProfessorDto {
   @IsNotEmpty()
@@ -31,16 +31,16 @@ export class CreateProfessorDto {
   })
   materias: Materia[];
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsUUID()
   @ApiProperty({
     description: 'IDs das turmas relacionadas à pergunta',
     example: 'af67065b-23c0-4ee4-ac83-79a8dcfe284d',
     required: true,
   })
-  turmas: Turma[];
+  turmas?: Turma[];
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsUUID()
   @ApiProperty({
     description: 'IDs das provas relacionadas ao professor',

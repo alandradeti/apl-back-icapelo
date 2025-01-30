@@ -5,6 +5,7 @@ import { IPergunta } from './interfaces/pergunta.entity.interface';
 import { Prova } from 'src/provas/entities/prova.entity';
 import { DatabaseEntity } from 'src/database/entities/database.entity';
 import { Dificuldade } from '../enums/pergunta.enum';
+import { materialize } from 'rxjs';
 
 @Entity({
   name: 'pergunta',

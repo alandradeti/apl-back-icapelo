@@ -23,7 +23,7 @@ export class Aluno extends DatabaseEntity implements IAluno {
   @ManyToMany(() => Turma, (turma) => turma.alunos, {
     nullable: false,
   })
-  turmas: Turma[];
+  turmas?: Turma[];
 
   @ManyToMany(() => Prova, (prova) => prova.alunos)
   provas?: Prova[];

@@ -7,6 +7,6 @@ export interface IProfessor {
   matricula: string;
   usuario: Usuario;
   materias: Materia[];
-  turmas: ITurma[];
+  turmas?: ITurma[];
   provas?: IProva[];
 }
