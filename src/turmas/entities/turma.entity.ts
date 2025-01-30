@@ -28,15 +28,11 @@ export class Turma extends DatabaseEntity implements ITurma {
   })
   periodo: PeriodoTurma;
 
-  @ManyToMany(() => Aluno, (aluno) => aluno.turmas, {
-    nullable: false,
-  })
+  @ManyToMany(() => Aluno, (aluno) => aluno.turmas)
   @JoinTable()
   alunos: Aluno[];
 
-  @ManyToMany(() => Professor, (professor) => professor.turmas, {
-    nullable: false,
-  })
+  @ManyToMany(() => Professor, (professor) => professor.turmas)
   @JoinTable()
   professores: Professor[];
 }

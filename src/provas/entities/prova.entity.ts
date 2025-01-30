@@ -21,19 +21,15 @@ export class Prova extends DatabaseEntity implements IProva {
   })
   materia: Materia;
 
-  @ManyToMany(() => Aluno, (aluno) => aluno.provas, {
-    nullable: false,
-  })
+  @ManyToMany(() => Aluno, (aluno) => aluno.provas)
+  @JoinTable()
   alunos: Aluno[];
 
-  @ManyToMany(() => Professor, (professor) => professor.provas, {
-    nullable: false,
-  })
+  @ManyToMany(() => Professor, (professor) => professor.provas)
+  @JoinTable()
   professores: Professor[];
 
-  @ManyToMany(() => Pergunta, (pergunta) => pergunta.provas, {
-    nullable: false,
-  })
+  @ManyToMany(() => Pergunta, (pergunta) => pergunta.provas)
   @JoinTable()
   perguntas: IPergunta[];
 }
