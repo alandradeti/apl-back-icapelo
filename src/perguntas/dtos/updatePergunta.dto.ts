@@ -1,26 +1,32 @@
 import { PartialType } from '@nestjs/mapped-types';
 import { CreatePerguntaDto } from './createPergunta.dto';
 import { ApiProperty } from '@nestjs/swagger';
-import { IMateria } from 'src/materias/entities/interfaces/materia.entity.interface';
 import { IAlternativa } from 'src/alternativas/entities/interfaces/alternativa.entity.interface';
+import { IProva } from 'src/provas/entities/interfaces/prova.entity.interface';
+import { IMateria } from 'src/materias/entities/interfaces/materia.entity.interface';
+import { Dificuldade } from '../enums/pergunta.enum';
 
 export class UpdatePerguntaDto extends PartialType(CreatePerguntaDto) {
   @ApiProperty({
     description: 'Enunciado da pergunta',
     example: 'Qual é a fórmula da área do círculo?',
+    required: false,
   })
   enunciado?: string;
 
   @ApiProperty({
     description: 'ID da matéria relacionada à pergunta',
-    example: {
-      id: '69bb2d45-9880-4db7-b600-4ab044d99572',
-      nome: 'Matemática',
-      descricao: 'A matéria de matemática aborda álgebra e cálculo.',
-    },
+    example: 'af67065b-23c0-4ee4-ac83-79a8dcfe284d',
     required: false,
   })
   materia?: IMateria;
+
+  @ApiProperty({
+    description: 'Dificuldade da pergunta',
+    example: Dificuldade.FACIL,
+    required: false,
+  })
+  dificuldade?: Dificuldade;
 
   @ApiProperty({
     description: 'IDs das alternativas relacionadas à pergunta',
@@ -39,4 +45,18 @@ export class UpdatePerguntaDto extends PartialType(CreatePerguntaDto) {
     required: false,
   })
   alternativas?: IAlternativa[];
+
+  @ApiProperty({
+    description: 'IDs das provas',
+    example: [
+      {
+        id: 'af67065b-23c0-4ee4-ac83-79a8dcfe284d',
+      },
+      {
+        id: 'a10e2a53-5a02-406b-aa80-961ba271aeb3',
+      },
+    ],
+    required: false,
+  })
+  provas?: IProva[];
 }

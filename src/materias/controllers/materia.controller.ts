@@ -92,7 +92,7 @@ export class MateriaController {
     @Query('limite') limite: number,
     @Query('pagina') pagina: number,
   ): Promise<IMateria[]> {
-    return this.materiaService.findAllWithEntities(limite, pagina);
+    return this.materiaService.findAll(limite, pagina, true);
   }
 
   @ApiOperation({ summary: 'Busca uma matéria com as perguntas pelo ID' })
@@ -106,7 +106,7 @@ export class MateriaController {
   async findByIdWithEntities(
     @Param('id') id: string,
   ): Promise<IMateria | null> {
-    return this.materiaService.findByIdWithEntities(id);
+    return this.materiaService.findById(id, true);
   }
 
   @ApiOperation({ summary: 'Busca uma matéria pelo ID' })

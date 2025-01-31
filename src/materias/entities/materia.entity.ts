@@ -1,16 +1,14 @@
-import { Column, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToMany, OneToMany } from 'typeorm';
 import { IMateria } from './interfaces/materia.entity.interface';
 import { Pergunta } from 'src/perguntas/entities/pergunta.entity';
+import { Professor } from 'src/professores/entities/professor.entity';
+import { Prova } from 'src/provas/entities/prova.entity';
+import { DatabaseEntity } from 'src/database/entities/database.entity';
 
 @Entity({
   name: 'materia',
 })
-export class Materia implements IMateria {
-  @PrimaryGeneratedColumn('uuid', {
-    name: 'id',
-  })
-  id?: string | undefined;
-
+export class Materia extends DatabaseEntity implements IMateria {
   @Column({
     name: 'nome',
     type: 'varchar',
@@ -30,4 +28,10 @@ export class Materia implements IMateria {
     cascade: true,
   })
   perguntas?: Pergunta[];
+
+  @ManyToMany(() => Professor, (professor) => professor.materias)
+  professores?: Professor[];
+
+  @OneToMany(() => Prova, (prova) => prova.materia)
+  provas?: Prova[];
 }

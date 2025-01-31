@@ -2,34 +2,28 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MateriaModule } from './materias/materia.module';
-import { ConfigModule } from '@nestjs/config';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { AlternativaModule } from './alternativas/alternativa.module';
 import { PerguntaModule } from './perguntas/pergunta.module';
+import { DatabaseModule } from './database/database.module';
+import { ProfessorModule } from './professores/professor.module';
+import { UsuarioModule } from './usuarios/usuario.module';
+import { AlunoModule } from './alunos/aluno.module';
+import { TurmaModule } from './turmas/turma.module';
+import { ProvaModule } from './provas/prova.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true }),
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: process.env.HOST_DATABASE,
-      port: Number(process.env.PORT_DATABASE),
-      username: process.env.USER_DATABASE,
-      password: process.env.PASS_DATABASE,
-      database: process.env.NAME_DATABASE,
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      synchronize: process.env.NODE_ENV !== 'production',
-      logging: process.env.NODE_ENV === 'development',
-      ssl:
-        process.env.VERIFY_SSL_DATABASE === 'true'
-          ? { rejectUnauthorized: false }
-          : false,
-    }),
+    DatabaseModule,
     MateriaModule,
     PerguntaModule,
     AlternativaModule,
+    ProfessorModule,
+    UsuarioModule,
+    AlunoModule,
+    TurmaModule,
+    ProvaModule,
   ],
-  controllers: [AppController], 
+  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}

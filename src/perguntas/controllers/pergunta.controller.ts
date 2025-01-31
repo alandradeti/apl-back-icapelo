@@ -23,7 +23,7 @@ import { Pergunta } from '../entities/pergunta.entity';
 import { IPergunta } from '../entities/interfaces/pergunta.entity.interface';
 
 @ApiTags('Perguntas')
-@Controller('perguntas')
+@Controller('pergunta')
 export class PerguntaController {
   constructor(private readonly perguntaService: PerguntaService) {}
 
@@ -93,7 +93,7 @@ export class PerguntaController {
     @Query('limite') limite: number,
     @Query('pagina') pagina: number,
   ): Promise<IPergunta[]> {
-    return this.perguntaService.findAllWithEntities(limite, pagina);
+    return this.perguntaService.findAll(limite, pagina, true);
   }
 
   @ApiOperation({ summary: 'Busca uma pergunta com as alternativas pelo ID' })
@@ -107,7 +107,8 @@ export class PerguntaController {
   async findByIdWithEntities(
     @Param('id') id: string,
   ): Promise<IPergunta | null> {
-    return this.perguntaService.findByIdWithEntities(id);
+    const populateOptions = { alternativas: true };
+    return this.perguntaService.findById(id, true);
   }
 
   @ApiOperation({ summary: 'Busca uma pergunta pelo ID' })

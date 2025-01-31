@@ -22,7 +22,7 @@ import { UpdateAlternativaDto } from '../dtos/updateAlternativa.dto';
 import { Alternativa } from '../entities/alternativa.entity';
 import { IAlternativa } from '../entities/interfaces/alternativa.entity.interface';
 @ApiTags('Alternativas')
-@Controller('alternativas')
+@Controller('alternativa')
 export class AlternativaController {
   constructor(private readonly alternativaService: AlternativaService) {}
 
@@ -37,7 +37,9 @@ export class AlternativaController {
     type: Alternativa,
   })
   @Post()
-  async create(@Body() createAlternativaDto: CreateAlternativaDto): Promise<IAlternativa> {
+  async create(
+    @Body() createAlternativaDto: CreateAlternativaDto,
+  ): Promise<IAlternativa> {
     return this.alternativaService.create(createAlternativaDto);
   }
 
@@ -64,7 +66,7 @@ export class AlternativaController {
     @Query('limite') limite: number,
     @Query('pagina') pagina: number,
   ): Promise<IAlternativa[]> {
-    return this.alternativaService.findAllWithEntities(limite, pagina);
+    return this.alternativaService.findAll(limite, pagina, true);
   }
 
   @ApiOperation({ summary: 'Busca uma alternativa com a pergunta pelo ID' })
@@ -75,8 +77,10 @@ export class AlternativaController {
     type: Alternativa,
   })
   @Get('/detalhe/:id')
-  async findByIdWithEntities(@Param('id') id: string): Promise<IAlternativa | null> { 
-    return this.alternativaService.findByIdWithEntities(id);
+  async findByIdWithEntities(
+    @Param('id') id: string,
+  ): Promise<IAlternativa | null> {
+    return this.alternativaService.findById(id, true);
   }
 
   @ApiOperation({ summary: 'Lista todas as alternativas' })

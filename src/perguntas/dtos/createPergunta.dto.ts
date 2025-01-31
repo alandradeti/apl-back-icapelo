@@ -1,13 +1,15 @@
 import { ApiProperty } from '@nestjs/swagger';
 import {
+  IsEnum,
   IsNotEmpty,
   IsOptional,
   IsString,
-  ValidateNested,
+  IsUUID,
 } from 'class-validator';
-import { CreateMateriaDto } from 'src/materias/dtos/createMateria.dto';
-import { Type } from 'class-transformer';
 import { IAlternativa } from 'src/alternativas/entities/interfaces/alternativa.entity.interface';
+import { IMateria } from 'src/materias/entities/interfaces/materia.entity.interface';
+import { IProva } from 'src/provas/entities/interfaces/prova.entity.interface';
+import { Dificuldade } from '../enums/pergunta.enum';
 
 export class CreatePerguntaDto {
   @IsNotEmpty()
@@ -19,18 +21,22 @@ export class CreatePerguntaDto {
   enunciado: string;
 
   @IsNotEmpty()
-  @ValidateNested()
-  @Type(() => CreateMateriaDto)
+  @IsEnum(Dificuldade)
   @ApiProperty({
-    description: 'ID da matéria relacionada à pergunta',
-    example: {
-      id: '6f079307-3886-4367-b128-fc45fc5a203e',
-      nome: 'Matemática',
-      descricao: 'A matéria de matemática aborda álgebra e cálculo.',
-    },
+    description: 'Dificuldade da pergunta',
+    example: Dificuldade.FACIL,
     required: true,
   })
-  materia: CreateMateriaDto;
+  dificuldade: Dificuldade;
+
+  @IsNotEmpty()
+  @IsUUID()
+  @ApiProperty({
+    description: 'ID da matéria relacionada à pergunta',
+    example: 'af67065b-23c0-4ee4-ac83-79a8dcfe284d',
+    required: true,
+  })
+  materia: IMateria;
 
   @IsOptional()
   @ApiProperty({
@@ -50,4 +56,19 @@ export class CreatePerguntaDto {
     required: false,
   })
   alternativas?: IAlternativa[];
+
+  @IsOptional()
+  @ApiProperty({
+    description: 'IDs das provas',
+    example: [
+      {
+        id: 'af67065b-23c0-4ee4-ac83-79a8dcfe284d',
+      },
+      {
+        id: 'a10e2a53-5a02-406b-aa80-961ba271aeb3',
+      },
+    ],
+    required: false,
+  })
+  provas?: IProva[];
 }
