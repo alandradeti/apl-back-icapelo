@@ -27,5 +27,5 @@ jobs:
            --build-arg USER_DATABASE=${{ secrets.USER_DATABASE }} \
            --build-arg PASS_DATABASE=${{ secrets.PASS_DATABASE }} \
            --build-arg NAME_DATABASE=${{ secrets.NAME_DATABASE }} \
-           --build-arg ENV=${{ secrets.ENV }} \
+           --build-arg ENV=${{ secrets.ENV }} .
           docker push $DOCKER_USERNAME/icapelo:latest
