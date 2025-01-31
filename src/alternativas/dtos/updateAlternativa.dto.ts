@@ -19,10 +19,7 @@ export class UpdateAlternativaDto extends PartialType(CreateAlternativaDto) {
 
   @ApiProperty({
     description: 'Pergunta relacionada à alternativa (atualização opcional)',
-    example: {
-      id: '550e8400-e29b-41d4-a716-446655440000',
-      enunciado: 'Qual é a fórmula da área do círculo?',
-    },
+    example: '550e8400-e29b-41d4-a716-446655440000',
     required: false,
   })
   pergunta?: IPergunta;
