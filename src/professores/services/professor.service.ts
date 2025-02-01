@@ -13,7 +13,7 @@ export class ProfessorService {
     relation: boolean = false,
   ): Promise<IProfessor[]> {
     const populateOptions = relation
-      ? { materias: true, turmas: true, provas: true }
+      ? { usuario: true, materias: true, turmas: true, provas: true }
       : {};
 
     return await this.professorRepository.findAll(limit, page, populateOptions);
@@ -21,7 +21,7 @@ export class ProfessorService {
 
   async findById(id: string, relation: boolean = false): Promise<IProfessor> {
     const populateOptions = relation
-      ? { materias: true, turmas: true, provas: true }
+      ? { usuario: true, materias: true, turmas: true, provas: true }
       : {};
 
     const professor = await this.professorRepository.findById(

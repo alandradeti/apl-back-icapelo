@@ -4,6 +4,7 @@ import { Pergunta } from 'src/perguntas/entities/pergunta.entity';
 import { Professor } from 'src/professores/entities/professor.entity';
 import { Prova } from 'src/provas/entities/prova.entity';
 import { DatabaseEntity } from 'src/database/entities/database.entity';
+import { Nota } from 'src/notas/entities/nota.entity';
 
 @Entity({
   name: 'materia',
@@ -17,12 +18,8 @@ export class Materia extends DatabaseEntity implements IMateria {
   })
   nome: string;
 
-  @Column({
-    name: 'descricao',
-    type: 'varchar',
-    nullable: false,
-  })
-  descricao: string;
+  @OneToMany(() => Nota, (nota) => nota.materia)
+  notas?: Nota[];
 
   @OneToMany(() => Pergunta, (pergunta) => pergunta.materia, {
     cascade: true,

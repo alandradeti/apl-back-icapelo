@@ -8,7 +8,7 @@ import { DatabaseEntity } from 'src/database/entities/database.entity';
 })
 export class Alternativa extends DatabaseEntity implements IAlternativa {
   @Column({
-    name: 'nome',
+    name: 'descricao',
     type: 'varchar',
     nullable: false,
   })
