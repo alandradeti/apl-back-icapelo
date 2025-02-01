@@ -4,19 +4,27 @@ import { Professor } from 'src/professores/entities/professor.entity';
 import { IPergunta } from 'src/perguntas/entities/interfaces/pergunta.entity.interface';
 import { ApiProperty, PartialType } from '@nestjs/swagger';
 import { CreateProvaDto } from './createProva.dto';
+import { ProvaStatus } from '../enums/provaStatus.enum';
 
 export class UpdateProvaDto extends PartialType(CreateProvaDto) {
   @ApiProperty({
     description: 'Titulo da prova',
     example: 'Prova de Matematica',
-    required: true,
+    required: false,
   })
-  titulo: string;
+  titulo?: string;
+
+  @ApiProperty({
+    description: 'Status da prova',
+    example: ProvaStatus.ABERTA,
+    required: false,
+  })
+  status?: ProvaStatus;
 
   @ApiProperty({
     description: 'ID da materia relacionada a prova',
     example: 'af67065b-23c0-4ee4-ac83-79a8dcfe284d',
-    required: true,
+    required: false,
   })
   materia?: Materia;
 
@@ -26,7 +34,7 @@ export class UpdateProvaDto extends PartialType(CreateProvaDto) {
       'af67065b-23c0-4ee4-ac83-79a8dcfe284d',
       'af67065b-23c0-4ee4-ac83-79a8dcfe284d',
     ],
-    required: true,
+    required: false,
   })
   alunos?: Aluno[];
 
@@ -36,7 +44,7 @@ export class UpdateProvaDto extends PartialType(CreateProvaDto) {
       'af67065b-23c0-4ee4-ac83-79a8dcfe284d',
       'af67065b-23c0-4ee4-ac83-79a8dcfe284d',
     ],
-    required: true,
+    required: false,
   })
   professores?: Professor[];
 
@@ -46,7 +54,7 @@ export class UpdateProvaDto extends PartialType(CreateProvaDto) {
       'af67065b-23c0-4ee4-ac83-79a8dcfe284d',
       'af67065b-23c0-4ee4-ac83-79a8dcfe284d',
     ],
-    required: true,
+    required: false,
   })
   perguntas?: IPergunta[];
 }

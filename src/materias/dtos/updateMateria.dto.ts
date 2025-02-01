@@ -3,6 +3,7 @@ import { CreateMateriaDto } from './createMateria.dto';
 import { IPergunta } from 'src/perguntas/entities/interfaces/pergunta.entity.interface';
 import { IProfessor } from 'src/professores/entities/interfaces/professor.entity.interface';
 import { IProva } from 'src/provas/entities/interfaces/prova.entity.interface';
+import { INota } from 'src/notas/entities/interfaces/nota.entity.interface';
 
 export class UpdateMateriaDto extends PartialType(CreateMateriaDto) {
   @ApiProperty({
@@ -13,11 +14,15 @@ export class UpdateMateriaDto extends PartialType(CreateMateriaDto) {
   nome?: string;
 
   @ApiProperty({
-    description: 'Descrição da matéria (atualização opcional)',
-    example: 'A matéria de matemática aborda álgebra e cálculo.',
+    description: 'Notas associadas à matéria',
+    example: [
+      {
+        id: 'cb523d0c-67bb-45a3-bf48-dcb99f7d6dc8',
+      },
+    ],
     required: false,
   })
-  descricao?: string;
+  notas?: INota[];
 
   @ApiProperty({
     description: 'Perguntas associadas à matéria (atualização opcional)',

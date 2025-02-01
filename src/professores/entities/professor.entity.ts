@@ -5,7 +5,6 @@ import {
   Column,
   OneToOne,
   JoinColumn,
-  OneToMany,
   ManyToMany,
   JoinTable,
 } from 'typeorm';
@@ -35,5 +34,6 @@ export class Professor extends DatabaseEntity implements IProfessor {
   turmas?: Turma[];
 
   @ManyToMany(() => Prova, (prova) => prova.professores)
+  @JoinTable()
   provas?: Prova[];
 }

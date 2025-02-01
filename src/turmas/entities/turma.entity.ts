@@ -23,6 +23,7 @@ export class Turma extends DatabaseEntity implements ITurma {
 
   @Column({
     name: 'periodo',
+    type: 'enum',
     enum: PeriodoTurma,
     nullable: false,
   })

@@ -3,7 +3,8 @@ import { Materia } from 'src/materias/entities/materia.entity';
 import { Professor } from 'src/professores/entities/professor.entity';
 import { IPergunta } from 'src/perguntas/entities/interfaces/pergunta.entity.interface';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsString, IsUUID } from 'class-validator';
+import { IsEnum, IsNotEmpty, IsString, IsUUID } from 'class-validator';
+import { ProvaStatus } from '../enums/provaStatus.enum';
 
 export class CreateProvaDto {
   @IsNotEmpty()
@@ -14,6 +15,15 @@ export class CreateProvaDto {
     required: true,
   })
   titulo: string;
+
+  @IsNotEmpty()
+  @IsEnum(ProvaStatus)
+  @ApiProperty({
+    description: 'Status da prova',
+    example: ProvaStatus.ABERTA,
+    required: true,
+  })
+  status: ProvaStatus;
 
   @IsNotEmpty()
   @IsUUID()

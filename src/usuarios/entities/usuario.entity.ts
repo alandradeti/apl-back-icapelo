@@ -39,16 +39,20 @@ export class Usuario extends DatabaseEntity implements IUsuario {
   senha: string;
 
   @Column({
+    name: 'tipo',
     type: 'enum',
     enum: TipoUsuario,
+    nullable: false,
   })
   tipo: TipoUsuario;
 
-  @OneToOne(() => Aluno, (aluno) => aluno.usuario)
+  @OneToOne(() => Aluno, (aluno) => aluno.usuario, { nullable: true })
   @JoinColumn()
   aluno?: Aluno;
 
-  @OneToOne(() => Professor, (professor) => professor.usuario)
+  @OneToOne(() => Professor, (professor) => professor.usuario, {
+    nullable: true,
+  })
   @JoinColumn()
   professor?: Professor;
 }
