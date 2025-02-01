@@ -13,7 +13,7 @@ export class AlunoService {
     relation: boolean = false,
   ): Promise<IAluno[]> {
     const populateOptions = relation
-      ? { usuario: true, turmas: true, provas: true }
+      ? { usuario: true, turmas: true, provas: true, respostas: true }
       : {};
 
     return await this.alunoRepository.findAll(limit, page, populateOptions);
@@ -21,7 +21,7 @@ export class AlunoService {
 
   async findById(id: string, relation: boolean = false): Promise<IAluno> {
     const populateOptions = relation
-      ? { usuario: true, turmas: true, provas: true }
+      ? { usuario: true, turmas: true, provas: true, respostas: true }
       : {};
 
     const aluno = await this.alunoRepository.findById(id, populateOptions);

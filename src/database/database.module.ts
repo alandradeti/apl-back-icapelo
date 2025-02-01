@@ -10,6 +10,9 @@ import { Turma } from 'src/turmas/entities/turma.entity';
 import { Prova } from 'src/provas/entities/prova.entity';
 import { ConfigModule } from '@nestjs/config';
 import { Usuario } from 'src/usuarios/entities/usuario.entity';
+import { Nota } from 'src/notas/entities/nota.entity';
+import { Resposta } from 'src/respostas/entities/resposta.entity';
+import { PeriodoAvaliativo } from 'src/periodosAvaliativos/entities/periodoAvaliativo.entity';
 
 @Module({
   imports: [
@@ -37,6 +40,9 @@ import { Usuario } from 'src/usuarios/entities/usuario.entity';
     TypeOrmModule.forFeature([Turma]),
     TypeOrmModule.forFeature([Prova]),
     TypeOrmModule.forFeature([Usuario]),
+    TypeOrmModule.forFeature([Nota]),
+    TypeOrmModule.forFeature([Resposta]),
+    TypeOrmModule.forFeature([PeriodoAvaliativo]),
   ],
   providers: [DatabaseRepository],
   exports: [DatabaseRepository, TypeOrmModule, ConfigModule],

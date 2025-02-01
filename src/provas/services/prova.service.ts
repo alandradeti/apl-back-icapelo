@@ -18,6 +18,7 @@ export class ProvaService {
           perguntas: true,
           professores: true,
           alunos: true,
+          periodoAvaliativo: true,
         }
       : {};
 
@@ -31,6 +32,7 @@ export class ProvaService {
           perguntas: true,
           professores: true,
           alunos: true,
+          periodoAvaliativo: true,
         }
       : {};
 

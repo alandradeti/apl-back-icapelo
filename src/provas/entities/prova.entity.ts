@@ -3,9 +3,10 @@ import { Materia } from 'src/materias/entities/materia.entity';
 import { Professor } from 'src/professores/entities/professor.entity';
 import { Entity, Column, ManyToOne, ManyToMany, JoinTable } from 'typeorm';
 import { IProva } from './interfaces/prova.entity.interface';
-import { IPergunta } from 'src/perguntas/entities/interfaces/pergunta.entity.interface';
 import { Pergunta } from 'src/perguntas/entities/pergunta.entity';
 import { DatabaseEntity } from 'src/database/entities/database.entity';
+import { PeriodoAvaliativo } from 'src/periodosAvaliativos/entities/periodoAvaliativo.entity';
+import { ProvaStatus } from '../enums/provaStatus.enum';
 
 @Entity('prova')
 export class Prova extends DatabaseEntity implements IProva {
@@ -15,6 +16,14 @@ export class Prova extends DatabaseEntity implements IProva {
     nullable: false,
   })
   titulo: string;
+
+  @Column({
+    type: 'enum',
+    enum: ProvaStatus,
+    default: ProvaStatus.ABERTA,
+    nullable: false,
+  })
+  status: ProvaStatus;
 
   @ManyToOne(() => Materia, (materia) => materia.provas, {
     nullable: false,
@@ -29,7 +38,14 @@ export class Prova extends DatabaseEntity implements IProva {
   @JoinTable()
   professores: Professor[];
 
+  @ManyToOne(
+    () => PeriodoAvaliativo,
+    (periodoAvaliativo) => periodoAvaliativo.provas,
+    { nullable: false },
+  )
+  periodoAvaliativo: PeriodoAvaliativo;
+
   @ManyToMany(() => Pergunta, (pergunta) => pergunta.provas)
   @JoinTable()
-  perguntas: IPergunta[];
+  perguntas: Pergunta[];
 }

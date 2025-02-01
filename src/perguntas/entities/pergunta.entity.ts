@@ -1,6 +1,13 @@
 import { Alternativa } from 'src/alternativas/entities/alternativa.entity';
 import { Materia } from 'src/materias/entities/materia.entity';
-import { Column, Entity, ManyToMany, ManyToOne, OneToMany } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  ManyToOne,
+  OneToMany,
+} from 'typeorm';
 import { IPergunta } from './interfaces/pergunta.entity.interface';
 import { Prova } from 'src/provas/entities/prova.entity';
 import { DatabaseEntity } from 'src/database/entities/database.entity';
@@ -12,7 +19,7 @@ import { materialize } from 'rxjs';
 })
 export class Pergunta extends DatabaseEntity implements IPergunta {
   @Column({
-    name: 'nome',
+    name: 'enunciado',
     type: 'varchar',
     nullable: false,
   })
@@ -38,5 +45,6 @@ export class Pergunta extends DatabaseEntity implements IPergunta {
   alternativas?: Alternativa[];
 
   @ManyToMany(() => Prova, (prova) => prova.perguntas)
+  @JoinTable()
   provas?: Prova[];
 }

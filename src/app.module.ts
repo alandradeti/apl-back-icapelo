@@ -10,6 +10,9 @@ import { UsuarioModule } from './usuarios/usuario.module';
 import { AlunoModule } from './alunos/aluno.module';
 import { TurmaModule } from './turmas/turma.module';
 import { ProvaModule } from './provas/prova.module';
+import { NotaModule } from './notas/nota.module';
+import { PeriodoAvaliativoModule } from './periodosAvaliativos/periodoAvaliativo.module';
+import { RespostaModule } from './respostas/resposta.module';
 
 @Module({
   imports: [
@@ -22,6 +25,9 @@ import { ProvaModule } from './provas/prova.module';
     AlunoModule,
     TurmaModule,
     ProvaModule,
+    NotaModule,
+    PeriodoAvaliativoModule,
+    RespostaModule,
   ],
   controllers: [AppController],
   providers: [AppService],

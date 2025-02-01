@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { INota } from 'src/notas/entities/interfaces/nota.entity.interface';
 import { IPergunta } from 'src/perguntas/entities/interfaces/pergunta.entity.interface';
 import { IProfessor } from 'src/professores/entities/interfaces/professor.entity.interface';
 import { IProva } from 'src/provas/entities/interfaces/prova.entity.interface';
@@ -14,14 +15,17 @@ export class CreateMateriaDto {
   })
   nome: string;
 
-  @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   @ApiProperty({
-    description: 'Descrição da matéria',
-    example: 'A matéria de matemática aborda álgebra e cálculo.',
-    required: true,
+    description: 'Notas associadas à matéria',
+    example: [
+      {
+        id: 'cb523d0c-67bb-45a3-bf48-dcb99f7d6dc8',
+      },
+    ],
+    required: false,
   })
-  descricao: string;
+  notas?: INota[];
 
   @IsOptional()
   @ApiProperty({
