@@ -7,6 +7,7 @@ import {
   JoinColumn,
   ManyToMany,
   JoinTable,
+  OneToMany,
 } from 'typeorm';
 import { IProfessor } from './interfaces/professor.entity.interface';
 import { Turma } from 'src/turmas/entities/turma.entity';
@@ -22,7 +23,10 @@ export class Professor extends DatabaseEntity implements IProfessor {
   })
   matricula: string;
 
-  @OneToOne(() => Usuario, (usuario) => usuario.professor)
+  @OneToOne(() => Usuario, (usuario) => usuario.professor, {
+    cascade: true,
+    nullable: false,
+  })
   @JoinColumn()
   usuario: Usuario;
 
@@ -33,7 +37,6 @@ export class Professor extends DatabaseEntity implements IProfessor {
   @ManyToMany(() => Turma, (turma) => turma.professores)
   turmas?: Turma[];
 
-  @ManyToMany(() => Prova, (prova) => prova.professores)
-  @JoinTable()
+  @OneToMany(() => Prova, (prova) => prova.professor)
   provas?: Prova[];
 }

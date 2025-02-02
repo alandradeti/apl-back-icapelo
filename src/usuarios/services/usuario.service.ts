@@ -8,20 +8,12 @@ import { IUsuario } from '../entities/interfaces/usuario.entity.interface';
 export class UsuarioService {
   constructor(private readonly usuarioRepository: UsuarioRepository) {}
 
-  async findAll(
-    limit: number,
-    page: number,
-    relation: boolean = false,
-  ): Promise<IUsuario[]> {
-    const populateOptions = relation ? { aluno: true, professor: true } : {};
-
-    return await this.usuarioRepository.findAll(limit, page, populateOptions);
+  async findAll(limit: number, page: number): Promise<IUsuario[]> {
+    return await this.usuarioRepository.findAll(limit, page);
   }
 
   async findById(id: string, relation: boolean = false): Promise<IUsuario> {
-    const populateOptions = relation ? { aluno: true, professor: true } : {};
-
-    const usuario = await this.usuarioRepository.findById(id, populateOptions);
+    const usuario = await this.usuarioRepository.findById(id);
     if (!usuario) {
       throw new NotFoundException('Usuário não encontrado!');
     }

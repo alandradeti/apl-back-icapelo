@@ -14,7 +14,7 @@ export class UpdatePeriodoAvaliativoDto extends PartialType(
 
   @ApiProperty({
     description: 'IDs das provas relacionadas ao período avaliativo',
-    example: 'af67065b-23c0-4ee4-ac83-79a8dcfe284d',
+    example: [{ id: 'af67065b-23c0-4ee4-ac83-79a8dcfe284d' }],
     required: true,
   })
   provas?: IProva[];

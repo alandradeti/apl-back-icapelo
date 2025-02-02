@@ -13,7 +13,7 @@ import { ProvaModule } from './provas/prova.module';
 import { NotaModule } from './notas/nota.module';
 import { PeriodoAvaliativoModule } from './periodosAvaliativos/periodoAvaliativo.module';
 import { RespostaModule } from './respostas/resposta.module';
-import { CorrecaoModule } from './correcao/correcao.module';
+import { CorrecaoModule } from './correcoes/correcao.module';
 
 @Module({
   imports: [

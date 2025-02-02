@@ -13,17 +13,13 @@ export class NotaService {
     page: number,
     relation: boolean = false,
   ): Promise<INota[]> {
-    const populateOptions = relation
-      ? { aluno: true, prova: true, periodoAvaliativo: true, materia: true }
-      : {};
+    const populateOptions = relation ? { aluno: true, prova: true } : {};
 
     return await this.notaRepository.findAll(limit, page, populateOptions);
   }
 
   async findById(id: string, relation: boolean = false): Promise<INota> {
-    const populateOptions = relation
-      ? { aluno: true, prova: true, periodoAvaliativo: true, materia: true }
-      : {};
+    const populateOptions = relation ? { aluno: true, prova: true } : {};
 
     const nota = await this.notaRepository.findById(id, populateOptions);
     if (!nota) {

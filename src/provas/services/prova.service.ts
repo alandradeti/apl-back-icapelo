@@ -16,7 +16,7 @@ export class ProvaService {
       ? {
           materia: true,
           perguntas: true,
-          professores: true,
+          professor: true,
           alunos: true,
           periodoAvaliativo: true,
         }
@@ -30,7 +30,7 @@ export class ProvaService {
       ? {
           materia: true,
           perguntas: true,
-          professores: true,
+          professor: true,
           alunos: true,
           periodoAvaliativo: true,
         }

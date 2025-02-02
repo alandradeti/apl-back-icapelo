@@ -1,11 +1,23 @@
-import { Aluno } from 'src/alunos/entities/aluno.entity';
-import { Materia } from 'src/materias/entities/materia.entity';
-import { Professor } from 'src/professores/entities/professor.entity';
 import { IPergunta } from 'src/perguntas/entities/interfaces/pergunta.entity.interface';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEnum, IsNotEmpty, IsString, IsUUID } from 'class-validator';
+import {
+  IsArray,
+  IsEnum,
+  IsNotEmpty,
+  IsString,
+  ValidateNested,
+} from 'class-validator';
 import { ProvaStatus } from '../enums/provaStatus.enum';
 import { IPeriodoAvaliativo } from 'src/periodosAvaliativos/entities/interfaces/periodoAvaliativo.entity.interface';
+import { IMateria } from 'src/materias/entities/interfaces/materia.entity.interface';
+import { IAluno } from 'src/alunos/entities/interfaces/aluno.entity.interface';
+import { IProfessor } from 'src/professores/entities/interfaces/professor.entity.interface';
+import { Type } from 'class-transformer';
+import { PeriodoAvaliativoDto } from 'src/periodosAvaliativos/dtos/periodoAvaliativo.dto';
+import { PerguntaDto } from 'src/perguntas/dtos/pergunta.dto';
+import { ProfessorDto } from 'src/professores/dtos/professor.dto';
+import { AlunoDto } from 'src/alunos/dtos/aluno.dto';
+import { MateriaDto } from 'src/materias/dtos/materia.dto';
 
 export class CreateProvaDto {
   @IsNotEmpty()
@@ -27,51 +39,53 @@ export class CreateProvaDto {
   status: ProvaStatus;
 
   @IsNotEmpty()
-  @IsUUID()
+  @ValidateNested({ each: true })
+  @Type(() => MateriaDto)
   @ApiProperty({
     description: 'ID da materia relacionada a prova',
-    example: 'af67065b-23c0-4ee4-ac83-79a8dcfe284d',
+    example: { id: 'af67065b-23c0-4ee4-ac83-79a8dcfe284d' },
     required: true,
   })
-  materia: Materia;
+  materia: IMateria;
 
   @IsNotEmpty()
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => AlunoDto)
   @ApiProperty({
     description: 'IDs dos alunos relacionados a prova',
-    example: [
-      'af67065b-23c0-4ee4-ac83-79a8dcfe284d',
-      'af67065b-23c0-4ee4-ac83-79a8dcfe284d',
-    ],
+    example: [{ id: 'af67065b-23c0-4ee4-ac83-79a8dcfe284d' }],
     required: true,
   })
-  alunos: Aluno[];
+  alunos: IAluno[];
 
   @IsNotEmpty()
+  @ValidateNested({ each: true })
+  @Type(() => ProfessorDto)
   @ApiProperty({
     description: 'IDs dos professores realacionados a prova',
-    example: [
-      'af67065b-23c0-4ee4-ac83-79a8dcfe284d',
-      'af67065b-23c0-4ee4-ac83-79a8dcfe284d',
-    ],
+    example: { id: 'af67065b-23c0-4ee4-ac83-79a8dcfe284d' },
     required: true,
   })
-  professores: Professor[];
+  professor: IProfessor;
 
   @IsNotEmpty()
+  @ValidateNested({ each: true })
+  @Type(() => PeriodoAvaliativoDto)
   @ApiProperty({
     description: 'ID do período avaliativo relacionado a prova',
-    example: 'af67065b-23c0-4ee4-ac83-79a8dcfe284d',
+    example: { id: 'af67065b-23c0-4ee4-ac83-79a8dcfe284d' },
     required: true,
   })
   periodoAvaliativo: IPeriodoAvaliativo;
 
   @IsNotEmpty()
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => PerguntaDto)
   @ApiProperty({
     description: 'IDs das perguntas relacionados a prova',
-    example: [
-      'af67065b-23c0-4ee4-ac83-79a8dcfe284d',
-      'af67065b-23c0-4ee4-ac83-79a8dcfe284d',
-    ],
+    example: [{ id: 'af67065b-23c0-4ee4-ac83-79a8dcfe284d' }],
     required: true,
   })
   perguntas: IPergunta[];

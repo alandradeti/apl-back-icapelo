@@ -19,9 +19,6 @@ export class Materia extends DatabaseEntity implements IMateria {
   })
   nome: string;
 
-  @OneToMany(() => Nota, (nota) => nota.materia)
-  notas?: Nota[];
-
   @OneToMany(() => Pergunta, (pergunta) => pergunta.materia, {
     cascade: true,
   })

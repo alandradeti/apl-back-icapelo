@@ -10,7 +10,7 @@ export interface IProva {
   status: ProvaStatus;
   materia: IMateria;
   alunos: IAluno[];
-  professores: IProfessor[];
+  professor: IProfessor;
   periodoAvaliativo: IPeriodoAvaliativo;
   perguntas: IPergunta[];
 }

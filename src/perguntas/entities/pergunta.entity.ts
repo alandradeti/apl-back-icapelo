@@ -3,6 +3,7 @@ import { Materia } from 'src/materias/entities/materia.entity';
 import {
   Column,
   Entity,
+  JoinColumn,
   JoinTable,
   ManyToMany,
   ManyToOne,
@@ -42,6 +43,7 @@ export class Pergunta extends DatabaseEntity implements IPergunta {
   @OneToMany(() => Alternativa, (alternativa) => alternativa.pergunta, {
     cascade: true,
   })
+  @JoinColumn()
   alternativas?: Alternativa[];
 
   @ManyToMany(() => Prova, (prova) => prova.perguntas)

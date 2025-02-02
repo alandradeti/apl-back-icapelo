@@ -21,7 +21,6 @@ export class CorrecaoService {
       await this.respostaRepository.getRespostasByAlunoProvaPeriodo(
         createCorrecaoDto.alunoId,
         createCorrecaoDto.provaId,
-        createCorrecaoDto.periodoAvaliativoId,
       );
 
     if (!respostas || respostas.length === 0) {
@@ -48,8 +47,6 @@ export class CorrecaoService {
     return await this.notaRepository.create({
       aluno: { id: createCorrecaoDto.alunoId } as any,
       prova: { id: createCorrecaoDto.provaId } as any,
-      periodoAvaliativo: { id: createCorrecaoDto.periodoAvaliativoId } as any,
-      materia: { id: createCorrecaoDto.materiaId } as any,
       nota: notaCalculada,
     });
   }
