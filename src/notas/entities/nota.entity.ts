@@ -8,7 +8,7 @@ import { Materia } from 'src/materias/entities/materia.entity';
 
 @Entity('nota')
 export class Nota extends DatabaseEntity implements INota {
-  @Column({ type: 'float', nullable: false })
+  @Column('decimal', { nullable: false, precision: 5, scale: 2 })
   nota: number;
 
   @ManyToOne(() => Aluno, { nullable: false, onDelete: 'CASCADE' })
@@ -18,10 +18,4 @@ export class Nota extends DatabaseEntity implements INota {
   @ManyToOne(() => Prova, { nullable: false, onDelete: 'CASCADE' })
   @Index()
   prova: Prova;
-
-  @ManyToOne(() => PeriodoAvaliativo, { nullable: false, onDelete: 'CASCADE' })
-  periodoAvaliativo: PeriodoAvaliativo;
-
-  @ManyToOne(() => Materia, { nullable: false, onDelete: 'CASCADE' })
-  materia: Materia;
 }

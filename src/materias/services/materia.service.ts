@@ -15,7 +15,6 @@ export class MateriaService {
   ): Promise<IMateria[]> {
     const populateOptions = relation
       ? {
-          notas: true,
           perguntas: true,
           provas: true,
           professores: true,
@@ -28,7 +27,6 @@ export class MateriaService {
   async findById(id: string, relation: boolean = false): Promise<IMateria> {
     const populateOptions = relation
       ? {
-          notas: true,
           perguntas: true,
           provas: true,
           professores: true,

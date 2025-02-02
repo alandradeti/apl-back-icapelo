@@ -8,6 +8,4 @@ export interface INota {
   nota: number;
   aluno: IAluno;
   prova: IProva;
-  periodoAvaliativo: IPeriodoAvaliativo;
-  materia: IMateria;
 }

@@ -7,7 +7,6 @@ import { ITurma } from 'src/turmas/entities/interfaces/tuma.entity.interface';
 
 export interface IMateria {
   nome: string;
-  notas?: Nota[];
   perguntas?: IPergunta[];
   professores?: IProfessor[];
   provas?: IProva[];

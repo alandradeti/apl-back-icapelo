@@ -34,9 +34,10 @@ export class Prova extends DatabaseEntity implements IProva {
   @JoinTable()
   alunos: Aluno[];
 
-  @ManyToMany(() => Professor, (professor) => professor.provas)
-  @JoinTable()
-  professores: Professor[];
+  @ManyToOne(() => Professor, (professor) => professor.provas, {
+    onDelete: 'RESTRICT',
+  })
+  professor: Professor;
 
   @ManyToOne(
     () => PeriodoAvaliativo,

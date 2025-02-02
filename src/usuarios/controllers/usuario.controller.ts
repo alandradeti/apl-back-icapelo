@@ -92,7 +92,7 @@ export class UsuarioController {
     @Query('limite') limite: number,
     @Query('pagina') pagina: number,
   ): Promise<IUsuario[]> {
-    return this.usuarioService.findAll(limite, pagina, true);
+    return this.usuarioService.findAll(limite, pagina);
   }
 
   @ApiOperation({ summary: 'Busca um usuário detalhadamente pelo ID' })
@@ -106,12 +106,7 @@ export class UsuarioController {
   async findByIdWithEntities(
     @Param('id') id: string,
   ): Promise<IUsuario | null> {
-    const populateOptions = {
-      materias: true,
-      turmas: true,
-      provas: true,
-    };
-    return this.usuarioService.findById(id, true);
+    return this.usuarioService.findById(id);
   }
 
   @ApiOperation({ summary: 'Busca um usuário pelo ID' })

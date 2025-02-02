@@ -1,15 +1,21 @@
 import { ApiProperty } from '@nestjs/swagger';
 import {
+  ArrayNotEmpty,
+  IsArray,
   IsEnum,
   IsNotEmpty,
   IsOptional,
   IsString,
-  IsUUID,
+  ValidateNested,
 } from 'class-validator';
 import { IAlternativa } from 'src/alternativas/entities/interfaces/alternativa.entity.interface';
 import { IMateria } from 'src/materias/entities/interfaces/materia.entity.interface';
 import { IProva } from 'src/provas/entities/interfaces/prova.entity.interface';
 import { Dificuldade } from '../enums/pergunta.enum';
+import { AlternativaDto } from 'src/alternativas/dtos/alternativa.dto';
+import { Type } from 'class-transformer';
+import { MateriaDto } from 'src/materias/dtos/materia.dto';
+import { ProvaDto } from 'src/provas/dtos/prova.dto';
 
 export class CreatePerguntaDto {
   @IsNotEmpty()
@@ -30,44 +36,39 @@ export class CreatePerguntaDto {
   dificuldade: Dificuldade;
 
   @IsNotEmpty()
-  @IsUUID()
+  @ValidateNested({ each: true })
+  @Type(() => MateriaDto)
   @ApiProperty({
     description: 'ID da matéria relacionada à pergunta',
-    example: 'af67065b-23c0-4ee4-ac83-79a8dcfe284d',
+    example: { id: 'af67065b-23c0-4ee4-ac83-79a8dcfe284d' },
     required: true,
   })
   materia: IMateria;
 
+  @IsArray()
   @IsOptional()
+  @ValidateNested({ each: true })
+  @Type(() => AlternativaDto)
   @ApiProperty({
-    description: 'IDs das alternativas relacionadas à pergunta',
+    description: 'Alternativas relacionadas à pergunta',
     example: [
       {
         id: 'af67065b-23c0-4ee4-ac83-79a8dcfe284d',
         descricao: 'A fórmula da área do círculo é π * r²',
         correta: true,
       },
-      {
-        id: 'a10e2a53-5a02-406b-aa80-961ba271aeb3',
-        descricao: 'A fórmula da área do círculo é 2 * π * r',
-        correta: false,
-      },
     ],
     required: false,
   })
   alternativas?: IAlternativa[];
 
+  @IsArray()
   @IsOptional()
+  @ValidateNested({ each: true })
+  @Type(() => ProvaDto)
   @ApiProperty({
-    description: 'IDs das provas',
-    example: [
-      {
-        id: 'af67065b-23c0-4ee4-ac83-79a8dcfe284d',
-      },
-      {
-        id: 'a10e2a53-5a02-406b-aa80-961ba271aeb3',
-      },
-    ],
+    description: 'IDs das provas relacionadas à pergunta',
+    example: [{ id: 'af67065b-23c0-4ee4-ac83-79a8dcfe284d' }],
     required: false,
   })
   provas?: IProva[];

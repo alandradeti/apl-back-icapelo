@@ -4,19 +4,16 @@ import {
   IsEmail,
   IsEnum,
   IsNotEmpty,
-  IsOptional,
   IsString,
   IsStrongPassword,
-  IsUUID,
-  ValidateNested,
+  ValidateIf,
 } from 'class-validator';
-import { IProfessor } from 'src/professores/entities/interfaces/professor.entity.interface';
-import { IAluno } from 'src/alunos/entities/interfaces/aluno.entity.interface';
-import { AlunoDto } from 'src/alunos/dtos/aluno.dto';
-import { Type } from 'class-transformer';
-import { ProfessorDto } from 'src/professores/dtos/professor.dto';
+import { DatabaseDto } from 'src/database/dtos/database.dto';
 
-export class CreateUsuarioDto {
+export class UsuarioDto extends DatabaseDto {
+  static entityName: string = 'usuario';
+
+  @ValidateIf((usuario) => !usuario.id)
   @IsNotEmpty()
   @IsString()
   @ApiProperty({
@@ -26,6 +23,7 @@ export class CreateUsuarioDto {
   })
   nome: string;
 
+  @ValidateIf((usuario) => !usuario.id)
   @IsNotEmpty()
   @IsEmail({}, { message: 'O e-mail fornecido não é válido.' })
   @ApiProperty({
@@ -35,6 +33,7 @@ export class CreateUsuarioDto {
   })
   email: string;
 
+  @ValidateIf((usuario) => !usuario.id)
   @IsNotEmpty()
   @IsStrongPassword({
     minLength: 6,
@@ -50,6 +49,7 @@ export class CreateUsuarioDto {
   })
   senha: string;
 
+  @ValidateIf((usuario) => !usuario.id)
   @IsNotEmpty()
   @IsEnum(TipoUsuario)
   @ApiProperty({
@@ -58,26 +58,4 @@ export class CreateUsuarioDto {
     required: true,
   })
   tipo: TipoUsuario;
-
-  @IsOptional()
-  @ValidateNested({ each: true })
-  @Type(() => AlunoDto)
-  @ApiProperty({
-    description: 'ID do aluno relacionado ao professor',
-    example: {
-      id: '550e8400-e29b-41d4-a716-446655440000',
-    },
-  })
-  aluno?: IAluno;
-
-  @IsOptional()
-  @ValidateNested({ each: true })
-  @Type(() => ProfessorDto)
-  @ApiProperty({
-    description: 'ID do professor relacionado ao aluno',
-    example: {
-      id: '550e8400-e29b-41d4-a716-446655440001',
-    },
-  })
-  professor?: IProfessor;
 }
