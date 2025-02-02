@@ -5,6 +5,8 @@ import { IMateria } from 'src/materias/entities/interfaces/materia.entity.interf
 import { IPeriodoAvaliativo } from 'src/periodosAvaliativos/entities/interfaces/periodoAvaliativo.entity.interface';
 import { Prova } from 'src/provas/entities/prova.entity';
 import { CreateNotaDto } from './createNota.dto';
+import { IAluno } from 'src/alunos/entities/interfaces/aluno.entity.interface';
+import { IProva } from 'src/provas/entities/interfaces/prova.entity.interface';
 
 export class UpdateNotaDto extends PartialType(CreateNotaDto) {
   @IsNotEmpty()
@@ -21,7 +23,7 @@ export class UpdateNotaDto extends PartialType(CreateNotaDto) {
     example: 'af67065b-23c0-4ee4-ac83-79a8dcfe284d',
     required: false,
   })
-  aluno?: Aluno;
+  aluno?: IAluno;
 
   @IsNotEmpty()
   @ApiProperty({
@@ -29,7 +31,7 @@ export class UpdateNotaDto extends PartialType(CreateNotaDto) {
     example: 'af67065b-23c0-4ee4-ac83-79a8dcfe284d',
     required: false,
   })
-  prova?: Prova;
+  prova?: IProva;
 
   @ApiProperty({
     description: 'ID do período avaliativo relacionado a prova',

@@ -4,6 +4,7 @@ import { Column, ManyToMany, JoinTable, Entity } from 'typeorm';
 import { ITurma } from './interfaces/tuma.entity.interface';
 import { DatabaseEntity } from 'src/database/entities/database.entity';
 import { PeriodoTurma } from '../enums/turma.enum';
+import { Materia } from 'src/materias/entities/materia.entity';
 
 @Entity('turma')
 export class Turma extends DatabaseEntity implements ITurma {
@@ -28,6 +29,10 @@ export class Turma extends DatabaseEntity implements ITurma {
     nullable: false,
   })
   periodo: PeriodoTurma;
+
+  @ManyToMany(() => Materia, (materia) => materia.turmas)
+  @JoinTable()
+  materias: Materia[];
 
   @ManyToMany(() => Aluno, (aluno) => aluno.turmas)
   @JoinTable()

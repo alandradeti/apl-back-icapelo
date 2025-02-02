@@ -16,6 +16,7 @@ export class TurmaService {
       ? {
           professores: true,
           alunos: true,
+          materias: true,
         }
       : {};
 
@@ -27,6 +28,7 @@ export class TurmaService {
       ? {
           professores: true,
           alunos: true,
+          materias: true,
         }
       : {};
 

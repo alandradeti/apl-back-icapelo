@@ -46,6 +46,5 @@ export class Prova extends DatabaseEntity implements IProva {
   periodoAvaliativo: PeriodoAvaliativo;
 
   @ManyToMany(() => Pergunta, (pergunta) => pergunta.provas)
-  @JoinTable()
   perguntas: Pergunta[];
 }

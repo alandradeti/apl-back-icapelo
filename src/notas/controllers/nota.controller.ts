@@ -17,7 +17,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { PAGINATION } from 'src/database/contants/database.constants';
-import { NotaService } from '../services/nota.services';
+import { NotaService } from '../services/nota.service';
 import { CreateNotaDto } from '../dtos/createNota.dto';
 import { Nota } from '../entities/nota.entity';
 import { INota } from '../entities/interfaces/nota.entity.interface';

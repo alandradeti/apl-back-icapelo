@@ -14,14 +14,26 @@ export class MateriaService {
     relation: boolean = false,
   ): Promise<IMateria[]> {
     const populateOptions = relation
-      ? { notas: true, perguntas: true, provas: true, professores: true }
+      ? {
+          notas: true,
+          perguntas: true,
+          provas: true,
+          professores: true,
+          turmas: true,
+        }
       : {};
     return await this.materiaRepository.findAll(limit, page, populateOptions);
   }
 
   async findById(id: string, relation: boolean = false): Promise<IMateria> {
     const populateOptions = relation
-      ? { notas: true, perguntas: true, provas: true, professores: true }
+      ? {
+          notas: true,
+          perguntas: true,
+          provas: true,
+          professores: true,
+          turmas: true,
+        }
       : {};
     const materia = await this.materiaRepository.findById(id, populateOptions);
     if (!materia) {

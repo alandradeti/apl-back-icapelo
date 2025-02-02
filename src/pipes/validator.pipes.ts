@@ -1,10 +1,5 @@
-import { ValidationError, ValidatorOptions } from 'class-validator';
-
-export interface ValidationPipeOptions extends ValidatorOptions {
-  transform?: boolean;
-  disableErrorMessages?: boolean;
-  exceptionFactory?: (errors: ValidationError[]) => any;
-}
+import { BadRequestException } from '@nestjs/common';
+import { ValidationError } from 'class-validator';
 
 export const defaultExceptionFactory = (errors: ValidationError[]) => {
   const formatErrors = (errors: ValidationError[]) => {
@@ -24,11 +19,13 @@ export const defaultExceptionFactory = (errors: ValidationError[]) => {
     });
   };
 
-  return {
+  const errorResponse = {
     statusCode: 400,
     message:
       'Houve um problema com os dados enviados. Por favor, corrija os seguintes campos:',
     erros: formatErrors(errors),
     timestamp: new Date().toISOString(),
   };
+
+  return new BadRequestException(errorResponse);
 };

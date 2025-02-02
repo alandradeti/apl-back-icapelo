@@ -7,7 +7,7 @@ import { RespostaController } from './controllers/resposta.controller';
 @Module({
   imports: [DatabaseModule],
   providers: [RespostaService, RespostaRepository],
-  exports: [RespostaService],
+  exports: [RespostaService, RespostaRepository],
   controllers: [RespostaController],
 })
 export class RespostaModule {}
