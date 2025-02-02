@@ -5,6 +5,7 @@ import { Professor } from 'src/professores/entities/professor.entity';
 import { Prova } from 'src/provas/entities/prova.entity';
 import { DatabaseEntity } from 'src/database/entities/database.entity';
 import { Nota } from 'src/notas/entities/nota.entity';
+import { Turma } from 'src/turmas/entities/turma.entity';
 
 @Entity({
   name: 'materia',
@@ -31,4 +32,7 @@ export class Materia extends DatabaseEntity implements IMateria {
 
   @OneToMany(() => Prova, (prova) => prova.materia)
   provas?: Prova[];
+
+  @ManyToMany(() => Turma, (turma) => turma.materias)
+  turmas?: Turma[];
 }

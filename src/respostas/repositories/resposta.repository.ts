@@ -14,4 +14,22 @@ export class RespostaRepository extends DatabaseRepository<Resposta> {
   }
 
   //Métodos personalizados para Resposta
+  async getRespostasByAlunoProvaPeriodo(
+    alunoId: string,
+    provaId: string,
+    periodoAvaliativoId: string,
+  ): Promise<Resposta[]> {
+    return this.respostaRepository
+      .createQueryBuilder('resposta')
+      .innerJoinAndSelect('resposta.alternativa', 'alternativa')
+      .innerJoin('resposta.aluno', 'aluno')
+      .innerJoin('resposta.prova', 'prova')
+      .innerJoin('prova.periodoAvaliativo', 'periodoAvaliativo')
+      .where('aluno.id = :alunoId', { alunoId })
+      .andWhere('prova.id = :provaId', { provaId })
+      .andWhere('periodoAvaliativo.id = :periodoAvaliativoId', {
+        periodoAvaliativoId,
+      })
+      .getMany();
+  }
 }

@@ -4,7 +4,6 @@ import {
   DeepPartial,
   FindOptionsRelations,
 } from 'typeorm';
-import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
 import { IDatabaseRepository } from './interfaces/database.repository.interface';
 
 export class DatabaseRepository<T> implements IDatabaseRepository<T> {
@@ -38,8 +37,16 @@ export class DatabaseRepository<T> implements IDatabaseRepository<T> {
     return await this.repository.save(newEntity);
   }
 
-  async update(id: string, entity: QueryDeepPartialEntity<T>): Promise<void> {
-    await this.repository.update(id, entity);
+  async update(id: string, entity: DeepPartial<T>): Promise<void> {
+    const existingEntity = await this.repository.findOne({
+      where: { id },
+    } as unknown as FindOptionsWhere<T>);
+
+    if (!existingEntity) {
+      throw new Error('Entidade não encontrada');
+    }
+
+    await this.repository.save({ ...existingEntity, ...entity });
   }
 
   async delete(id: string): Promise<void> {

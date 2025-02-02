@@ -4,6 +4,7 @@ import { INota } from 'src/notas/entities/interfaces/nota.entity.interface';
 import { IPergunta } from 'src/perguntas/entities/interfaces/pergunta.entity.interface';
 import { IProfessor } from 'src/professores/entities/interfaces/professor.entity.interface';
 import { IProva } from 'src/provas/entities/interfaces/prova.entity.interface';
+import { ITurma } from 'src/turmas/entities/interfaces/tuma.entity.interface';
 
 export class CreateMateriaDto {
   @IsString()
@@ -17,7 +18,7 @@ export class CreateMateriaDto {
 
   @IsOptional()
   @ApiProperty({
-    description: 'Notas associadas à matéria',
+    description: 'IDs das notas associadas à matéria',
     example: [
       {
         id: 'cb523d0c-67bb-45a3-bf48-dcb99f7d6dc8',
@@ -29,15 +30,13 @@ export class CreateMateriaDto {
 
   @IsOptional()
   @ApiProperty({
-    description: 'Perguntas associadas à matéria',
+    description: 'IDs das perguntas associadas à matéria',
     example: [
       {
         id: 'cb523d0c-67bb-45a3-bf48-dcb99f7d6dc8',
-        enunciado: 'Qual é a fórmula da área do círculo?',
       },
       {
         id: '3792fee5-70d6-431f-8195-2b905e69f9b3',
-        enunciado: 'Qual é a fórmula da área do quadrado?',
       },
     ],
     required: false,
@@ -46,11 +45,10 @@ export class CreateMateriaDto {
 
   @IsOptional()
   @ApiProperty({
-    description: 'Professores associados à matéria',
+    description: 'IDs dos professores associados à matéria',
     example: [
       {
         id: 'cb523d0c-67bb-45a3-bf48-dcb99f7d6dc8',
-        nome: 'João da Silva',
       },
     ],
     required: false,
@@ -59,14 +57,25 @@ export class CreateMateriaDto {
 
   @IsOptional()
   @ApiProperty({
-    description: 'Provas associadas à matéria',
+    description: 'IDs das provas associadas à matéria',
     example: [
       {
         id: 'cb523d0c-67bb-45a3-bf48-dcb99f7d6dc8',
-        titulo: 'Prova 1',
       },
     ],
     required: false,
   })
   provas?: IProva[];
+
+  @IsOptional()
+  @ApiProperty({
+    description: 'IDs das turmas associadas à matéria',
+    example: [
+      {
+        id: 'cb523d0c-67bb-45a3-bf48-dcb99f7d6dc8',
+      },
+    ],
+    required: false,
+  })
+  turmas?: ITurma[];
 }
