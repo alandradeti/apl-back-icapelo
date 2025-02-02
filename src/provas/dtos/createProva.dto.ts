@@ -5,6 +5,7 @@ import { IPergunta } from 'src/perguntas/entities/interfaces/pergunta.entity.int
 import { ApiProperty } from '@nestjs/swagger';
 import { IsEnum, IsNotEmpty, IsString, IsUUID } from 'class-validator';
 import { ProvaStatus } from '../enums/provaStatus.enum';
+import { IPeriodoAvaliativo } from 'src/periodosAvaliativos/entities/interfaces/periodoAvaliativo.entity.interface';
 
 export class CreateProvaDto {
   @IsNotEmpty()
@@ -35,7 +36,6 @@ export class CreateProvaDto {
   materia: Materia;
 
   @IsNotEmpty()
-  @IsUUID()
   @ApiProperty({
     description: 'IDs dos alunos relacionados a prova',
     example: [
@@ -47,7 +47,6 @@ export class CreateProvaDto {
   alunos: Aluno[];
 
   @IsNotEmpty()
-  @IsUUID()
   @ApiProperty({
     description: 'IDs dos professores realacionados a prova',
     example: [
@@ -59,7 +58,14 @@ export class CreateProvaDto {
   professores: Professor[];
 
   @IsNotEmpty()
-  @IsUUID()
+  @ApiProperty({
+    description: 'ID do período avaliativo relacionado a prova',
+    example: 'af67065b-23c0-4ee4-ac83-79a8dcfe284d',
+    required: true,
+  })
+  periodoAvaliativo: IPeriodoAvaliativo;
+
+  @IsNotEmpty()
   @ApiProperty({
     description: 'IDs das perguntas relacionados a prova',
     example: [

@@ -8,11 +8,7 @@ import { defaultExceptionFactory } from './pipes/validator.pipes';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  // Configuração do filtro de exceção global
-  const httpAdapter = app.get(HttpAdapterHost);
-  app.useGlobalFilters(new GlobalExceptionFilter(httpAdapter));
-  app.useGlobalPipes(new ValidationPipe());
-
+  // Configuração do ValidationPipe global com tratamento adequado de exceções
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true,
@@ -21,6 +17,11 @@ async function bootstrap() {
       exceptionFactory: defaultExceptionFactory,
     }),
   );
+
+  // Configuração do filtro de exceção global
+  const httpAdapter = app.get(HttpAdapterHost);
+  app.useGlobalFilters(new GlobalExceptionFilter(httpAdapter));
+  app.useGlobalPipes(new ValidationPipe());
 
   // Configuração do Swagger
   const config = new DocumentBuilder()

@@ -13,6 +13,7 @@ import { ProvaModule } from './provas/prova.module';
 import { NotaModule } from './notas/nota.module';
 import { PeriodoAvaliativoModule } from './periodosAvaliativos/periodoAvaliativo.module';
 import { RespostaModule } from './respostas/resposta.module';
+import { CorrecaoModule } from './correcao/correcao.module';
 
 @Module({
   imports: [
@@ -25,9 +26,10 @@ import { RespostaModule } from './respostas/resposta.module';
     AlunoModule,
     TurmaModule,
     ProvaModule,
-    NotaModule,
     PeriodoAvaliativoModule,
     RespostaModule,
+    NotaModule,
+    CorrecaoModule,
   ],
   controllers: [AppController],
   providers: [AppService],

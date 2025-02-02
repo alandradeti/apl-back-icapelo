@@ -1,8 +1,9 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
-import { Aluno } from 'src/alunos/entities/aluno.entity';
-import { Professor } from 'src/professores/entities/professor.entity';
 import { CreateTurmaDto } from './createTurma.dto';
 import { PeriodoTurma } from '../enums/turma.enum';
+import { IAluno } from 'src/alunos/entities/interfaces/aluno.entity.interface';
+import { IProfessor } from 'src/professores/entities/interfaces/professor.entity.interface';
+import { IMateria } from 'src/materias/entities/interfaces/materia.entity.interface';
 
 export class UpdateTurmaDto extends PartialType(CreateTurmaDto) {
   @ApiProperty({
@@ -27,22 +28,32 @@ export class UpdateTurmaDto extends PartialType(CreateTurmaDto) {
   periodo: PeriodoTurma;
 
   @ApiProperty({
+    description: 'IDs das matérias relacionadas a turma',
+    example: [
+      { id: '550e8400-e29b-41d4-a716-446655440000' },
+      { id: '550e8400-e29b-41d4-a716-446655440001' },
+    ],
+    required: true,
+  })
+  materias: IMateria[];
+
+  @ApiProperty({
     description: 'IDs dos Alunos relacionados a turma',
     example: [
-      '550e8400-e29b-41d4-a716-446655440000',
-      '550e8400-e29b-41d4-a716-446655440000',
+      { id: '550e8400-e29b-41d4-a716-446655440000' },
+      { id: '550e8400-e29b-41d4-a716-446655440001' },
     ],
     required: false,
   })
-  alunos?: Aluno[];
+  alunos?: IAluno[];
 
   @ApiProperty({
     description: 'IDs dos Professores relacionados a turma',
     example: [
-      '550e8400-e29b-41d4-a716-446655440000',
-      '550e8400-e29b-41d4-a716-446655440000',
+      { id: '550e8400-e29b-41d4-a716-446655440002' },
+      { id: '550e8400-e29b-41d4-a716-446655440003' },
     ],
     required: false,
   })
-  professores?: Professor[];
+  professores?: IProfessor[];
 }
