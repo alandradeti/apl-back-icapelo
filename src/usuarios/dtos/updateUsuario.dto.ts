@@ -1,8 +1,8 @@
 import { TipoUsuario } from 'src/usuarios/enums/usuario.enum';
-import { Aluno } from 'src/alunos/entities/aluno.entity';
-import { Professor } from 'src/professores/entities/professor.entity';
 import { ApiProperty, PartialType } from '@nestjs/swagger';
 import { CreateUsuarioDto } from './createUsuario.dto';
+import { IAluno } from 'src/alunos/entities/interfaces/aluno.entity.interface';
+import { IProfessor } from 'src/professores/entities/interfaces/professor.entity.interface';
 
 export class UpdateUsuarioDto extends PartialType(CreateUsuarioDto) {
   @ApiProperty({
@@ -34,16 +34,18 @@ export class UpdateUsuarioDto extends PartialType(CreateUsuarioDto) {
   tipo?: TipoUsuario;
 
   @ApiProperty({
-    description: 'ID do aluno',
-    example: '550e8400-e29b-41d4-a716-446655440000',
-    required: false,
+    description: 'ID do aluno relacionado ao professor',
+    example: {
+      id: '550e8400-e29b-41d4-a716-446655440000',
+    },
   })
-  aluno?: Aluno;
+  aluno?: IAluno;
 
   @ApiProperty({
-    description: 'ID do professor',
-    example: '550e8400-e29b-41d4-a716-446655440000',
-    required: false,
+    description: 'ID do professor relacionado ao aluno',
+    example: {
+      id: '550e8400-e29b-41d4-a716-446655440001',
+    },
   })
-  professor?: Professor;
+  professor?: IProfessor;
 }

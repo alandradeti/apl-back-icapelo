@@ -1,6 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
-import { INota } from 'src/notas/entities/interfaces/nota.entity.interface';
 import { IPergunta } from 'src/perguntas/entities/interfaces/pergunta.entity.interface';
 import { IProfessor } from 'src/professores/entities/interfaces/professor.entity.interface';
 import { IProva } from 'src/provas/entities/interfaces/prova.entity.interface';
@@ -18,27 +17,8 @@ export class CreateMateriaDto {
 
   @IsOptional()
   @ApiProperty({
-    description: 'IDs das notas associadas à matéria',
-    example: [
-      {
-        id: 'cb523d0c-67bb-45a3-bf48-dcb99f7d6dc8',
-      },
-    ],
-    required: false,
-  })
-  notas?: INota[];
-
-  @IsOptional()
-  @ApiProperty({
     description: 'IDs das perguntas associadas à matéria',
-    example: [
-      {
-        id: 'cb523d0c-67bb-45a3-bf48-dcb99f7d6dc8',
-      },
-      {
-        id: '3792fee5-70d6-431f-8195-2b905e69f9b3',
-      },
-    ],
+    example: [{ id: 'cb523d0c-67bb-45a3-bf48-dcb99f7d6dc8' }],
     required: false,
   })
   perguntas?: IPergunta[];
@@ -46,11 +26,7 @@ export class CreateMateriaDto {
   @IsOptional()
   @ApiProperty({
     description: 'IDs dos professores associados à matéria',
-    example: [
-      {
-        id: 'cb523d0c-67bb-45a3-bf48-dcb99f7d6dc8',
-      },
-    ],
+    example: [{ id: 'cb523d0c-67bb-45a3-bf48-dcb99f7d6dc7' }],
     required: false,
   })
   professores?: IProfessor[];
@@ -58,11 +34,7 @@ export class CreateMateriaDto {
   @IsOptional()
   @ApiProperty({
     description: 'IDs das provas associadas à matéria',
-    example: [
-      {
-        id: 'cb523d0c-67bb-45a3-bf48-dcb99f7d6dc8',
-      },
-    ],
+    example: [{ id: 'cb523d0c-67bb-45a3-bf48-dcb99f7d6dc0' }],
     required: false,
   })
   provas?: IProva[];
@@ -70,11 +42,7 @@ export class CreateMateriaDto {
   @IsOptional()
   @ApiProperty({
     description: 'IDs das turmas associadas à matéria',
-    example: [
-      {
-        id: 'cb523d0c-67bb-45a3-bf48-dcb99f7d6dc8',
-      },
-    ],
+    example: [{ id: 'cb523d0c-67bb-45a3-bf48-dcb99f7d6dc6' }],
     required: false,
   })
   turmas?: ITurma[];

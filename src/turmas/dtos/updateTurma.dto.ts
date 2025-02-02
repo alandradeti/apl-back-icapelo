@@ -29,30 +29,21 @@ export class UpdateTurmaDto extends PartialType(CreateTurmaDto) {
 
   @ApiProperty({
     description: 'IDs das matérias relacionadas a turma',
-    example: [
-      { id: '550e8400-e29b-41d4-a716-446655440000' },
-      { id: '550e8400-e29b-41d4-a716-446655440001' },
-    ],
+    example: [{ id: '550e8400-e29b-41d4-a716-446655440000' }],
     required: true,
   })
   materias: IMateria[];
 
   @ApiProperty({
     description: 'IDs dos Alunos relacionados a turma',
-    example: [
-      { id: '550e8400-e29b-41d4-a716-446655440000' },
-      { id: '550e8400-e29b-41d4-a716-446655440001' },
-    ],
+    example: [{ id: '550e8400-e29b-41d4-a716-446655440000' }],
     required: false,
   })
   alunos?: IAluno[];
 
   @ApiProperty({
     description: 'IDs dos Professores relacionados a turma',
-    example: [
-      { id: '550e8400-e29b-41d4-a716-446655440002' },
-      { id: '550e8400-e29b-41d4-a716-446655440003' },
-    ],
+    example: [{ id: '550e8400-e29b-41d4-a716-446655440002' }],
     required: false,
   })
   professores?: IProfessor[];
