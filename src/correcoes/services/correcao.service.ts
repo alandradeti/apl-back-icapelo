@@ -17,11 +17,10 @@ export class CorrecaoService {
   async calcularNotaProva(
     createCorrecaoDto: CreateCorrecaoDto,
   ): Promise<number> {
-    const respostas =
-      await this.respostaRepository.getRespostasByAlunoProvaPeriodo(
-        createCorrecaoDto.alunoId,
-        createCorrecaoDto.provaId,
-      );
+    const respostas = await this.respostaRepository.getRespostasByAlunoProva(
+      createCorrecaoDto.alunoId,
+      createCorrecaoDto.provaId,
+    );
 
     if (!respostas || respostas.length === 0) {
       throw new NotFoundException(

@@ -28,6 +28,55 @@ import { UpdateNotaDto } from '../dtos/updateNota.dto';
 export class NotaController {
   constructor(private readonly notaService: NotaService) {}
 
+  @ApiOperation({ summary: 'Lista todas notas por matéria' })
+  @ApiParam({
+    name: 'alunoId',
+    type: String,
+    description: 'ID do aluno',
+    required: true,
+  })
+  @ApiParam({
+    name: 'materiaId',
+    type: String,
+    description: 'ID da matéria',
+    required: true,
+  })
+  @ApiResponse({
+    status: 201,
+    description: 'Notas retornadas com sucesso',
+    type: Nota,
+  })
+  @Get('/aluno/:alunoId/materia/:materiaId')
+  async obterNotasPorMateria(
+    @Param('alunoId') alunoId: string,
+    @Param('materiaId') materiaId: string,
+  ) {
+    return this.notaService.obterNotasPorMateria(alunoId, materiaId);
+  }
+
+  @ApiOperation({ summary: 'Lista todas notas por período avaliativo' })
+  @ApiParam({ name: 'alunoId', type: String, description: 'ID do aluno' })
+  @ApiParam({
+    name: 'periodoAvaliativoId',
+    type: String,
+    description: 'ID do perÍodo avaliativo',
+  })
+  @ApiResponse({
+    status: 201,
+    description: 'Notas retornadas com sucesso',
+    type: Nota,
+  })
+  @Get('/aluno/:alunoId/periodo-avaliativo/:periodoAvaliativoId')
+  async obterNotasPorPeriodoAvaliativo(
+    @Param('alunoId') alunoId: string,
+    @Param('periodoAvaliativoId') periodoAvaliativoId: string,
+  ) {
+    return this.notaService.obterNotasPorPeriodoAvaliativo(
+      alunoId,
+      periodoAvaliativoId,
+    );
+  }
+
   @ApiOperation({ summary: 'Cria uma nova nota' })
   @ApiBody({
     description: 'Dados para criação',

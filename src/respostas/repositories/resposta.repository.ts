@@ -14,7 +14,7 @@ export class RespostaRepository extends DatabaseRepository<Resposta> {
   }
 
   //Métodos personalizados para Resposta
-  async getRespostasByAlunoProvaPeriodo(
+  async getRespostasByAlunoProva(
     alunoId: string,
     provaId: string,
   ): Promise<Resposta[]> {

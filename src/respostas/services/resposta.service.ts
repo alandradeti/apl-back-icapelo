@@ -8,6 +8,13 @@ import { RespostaRepository } from '../repositories/resposta.repository';
 export class RespostaService {
   constructor(private readonly respostaRepository: RespostaRepository) {}
 
+  async obterRespostasPorAlunoProva(alunoId: string, provaId: string) {
+    return await this.respostaRepository.getRespostasByAlunoProva(
+      alunoId,
+      provaId,
+    );
+  }
+
   async findAll(
     limit: number,
     page: number,
