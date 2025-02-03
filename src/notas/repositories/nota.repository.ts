@@ -14,4 +14,30 @@ export class NotaRepository extends DatabaseRepository<Nota> {
   }
 
   //Métodos personalizados para Nota
+  async getNotaPorMateria(alunoId: string, materiaId: string): Promise<Nota[]> {
+    return this.notaRepository
+      .createQueryBuilder('nota')
+      .innerJoinAndSelect('nota.prova', 'prova')
+      .innerJoinAndSelect('prova.periodoAvaliativo', 'periodoAvaliativo')
+      .innerJoinAndSelect('prova.materia', 'materia')
+      .where('nota.alunoId = :alunoId', { alunoId })
+      .andWhere('materia.id = :materiaId', { materiaId })
+      .getMany();
+  }
+
+  async getNotaPorPeriodoAvaliativo(
+    alunoId: string,
+    periodoAvaliativoId: string,
+  ): Promise<Nota[]> {
+    return this.notaRepository
+      .createQueryBuilder('nota')
+      .innerJoinAndSelect('nota.prova', 'prova')
+      .innerJoinAndSelect('prova.materia', 'materia')
+      .innerJoinAndSelect('prova.periodoAvaliativo', 'periodoAvaliativo')
+      .where('nota.alunoId = :alunoId', { alunoId })
+      .andWhere('periodoAvaliativo.id = :periodoAvaliativoId', {
+        periodoAvaliativoId,
+      })
+      .getMany();
+  }
 }

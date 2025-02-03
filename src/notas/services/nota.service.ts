@@ -8,6 +8,23 @@ import { UpdateNotaDto } from '../dtos/updateNota.dto';
 export class NotaService {
   constructor(private readonly notaRepository: NotaRepository) {}
 
+  async obterNotasPorMateria(
+    alunoId: string,
+    materiaId: string,
+  ): Promise<INota[]> {
+    return this.notaRepository.getNotaPorMateria(alunoId, materiaId);
+  }
+
+  async obterNotasPorPeriodoAvaliativo(
+    alunoId: string,
+    periodoAvaliativoId: string,
+  ): Promise<INota[]> {
+    return this.notaRepository.getNotaPorPeriodoAvaliativo(
+      alunoId,
+      periodoAvaliativoId,
+    );
+  }
+
   async findAll(
     limit: number,
     page: number,
