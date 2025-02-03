@@ -29,11 +29,17 @@ export class NotaController {
   constructor(private readonly notaService: NotaService) {}
 
   @ApiOperation({ summary: 'Lista todas notas por matéria' })
-  @ApiParam({ name: 'alunoId', type: String, description: 'ID do aluno' })
+  @ApiParam({
+    name: 'alunoId',
+    type: String,
+    description: 'ID do aluno',
+    required: true,
+  })
   @ApiParam({
     name: 'materiaId',
     type: String,
     description: 'ID da matéria',
+    required: true,
   })
   @ApiResponse({
     status: 201,

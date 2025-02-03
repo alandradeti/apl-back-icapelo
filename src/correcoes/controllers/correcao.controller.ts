@@ -2,9 +2,11 @@
 import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { CorrecaoService } from '../services/correcao.service';
 import { CreateCorrecaoDto } from '../dtos/correcaoCreate.dto';
-import { ApiBody, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { INota } from 'src/notas/entities/interfaces/nota.entity.interface';
 import { Nota } from 'src/notas/entities/nota.entity';
+
+ApiTags('Correção');
 @Controller('correcao')
 export class CorrecaoController {
   constructor(private readonly correcaoService: CorrecaoService) {}
