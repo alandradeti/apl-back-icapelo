@@ -28,6 +28,37 @@ import { UpdateRespostaDto } from '../dtos/updateResposta.dto';
 export class RespostaController {
   constructor(private readonly respostaService: RespostaService) {}
 
+  @Get('/aluno/:alunoId/prova/:provaId')
+  @ApiOperation({
+    summary: 'Retorna todas as respostas de um aluno em uma prova',
+  })
+  @ApiParam({
+    name: 'alunoId',
+    required: true,
+    type: String,
+    description: 'ID do aluno',
+  })
+  @ApiParam({
+    name: 'provaId',
+    required: true,
+    type: String,
+    description: 'ID da prova',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Respostas encontradas com sucesso',
+    type: [Resposta],
+  })
+  async obterRespostasPorAlunoProva(
+    @Param('alunoId') alunoId: string,
+    @Param('provaId') provaId: string,
+  ) {
+    return await this.respostaService.obterRespostasPorAlunoProva(
+      alunoId,
+      provaId,
+    );
+  }
+
   @ApiOperation({ summary: 'Cria uma nova resposta' })
   @ApiBody({
     description: 'Dados para criação',

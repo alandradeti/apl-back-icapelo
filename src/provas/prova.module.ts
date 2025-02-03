@@ -7,7 +7,7 @@ import { ProvaController } from './controllers/prova.controller';
 @Module({
   imports: [DatabaseModule],
   providers: [ProvaService, ProvaRepository],
-  exports: [ProvaService],
+  exports: [ProvaService, ProvaRepository],
   controllers: [ProvaController],
 })
 export class ProvaModule {}
