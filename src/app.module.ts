@@ -15,9 +15,11 @@ import { PeriodoAvaliativoModule } from './periodosAvaliativos/periodoAvaliativo
 import { RespostaModule } from './respostas/resposta.module';
 import { CorrecaoModule } from './correcoes/correcao.module';
 import { MontarProvaModule } from './montarProvas/montarProva.module';
+import { PrometheusModule } from '@willsoto/nestjs-prometheus';
 
 @Module({
   imports: [
+    PrometheusModule.register(),
     DatabaseModule,
     MateriaModule,
     PerguntaModule,
