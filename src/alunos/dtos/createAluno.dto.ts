@@ -27,10 +27,6 @@ export class CreateAlunoDto {
     description: 'ID do usuário relacionado ao professor',
     example: {
       id: '550e8400-e29b-41d4-a716-446655440002',
-      nome: 'João',
-      email: 'Jx6b6@example.com',
-      senha: 'Abc123@',
-      tipo: 'ALUNO',
     },
     required: true,
   })

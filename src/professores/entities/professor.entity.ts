@@ -24,15 +24,15 @@ export class Professor extends DatabaseEntity implements IProfessor {
   matricula: string;
 
   @OneToOne(() => Usuario, (usuario) => usuario.professor, {
-    cascade: true,
     nullable: false,
+    onDelete: 'CASCADE',
   })
   @JoinColumn()
   usuario: Usuario;
 
   @ManyToMany(() => Materia, (materia) => materia.professores)
   @JoinTable()
-  materias: Materia[];
+  materias?: Materia[];
 
   @ManyToMany(() => Turma, (turma) => turma.professores)
   turmas?: Turma[];

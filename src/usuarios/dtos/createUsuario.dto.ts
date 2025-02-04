@@ -66,6 +66,7 @@ export class CreateUsuarioDto {
     description: 'ID do aluno relacionado ao professor',
     example: {
       id: '550e8400-e29b-41d4-a716-446655440000',
+      matricula: '123456',
     },
   })
   aluno?: IAluno;
@@ -77,6 +78,7 @@ export class CreateUsuarioDto {
     description: 'ID do professor relacionado ao aluno',
     example: {
       id: '550e8400-e29b-41d4-a716-446655440001',
+      matricula: '123456',
     },
   })
   professor?: IProfessor;

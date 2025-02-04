@@ -6,7 +6,7 @@ import { Usuario } from 'src/usuarios/entities/usuario.entity';
 export interface IProfessor {
   matricula: string;
   usuario: Usuario;
-  materias: Materia[];
+  materias?: Materia[];
   turmas?: ITurma[];
   provas?: IProva[];
 }
