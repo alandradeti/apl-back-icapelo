@@ -5,6 +5,7 @@ import {
   FindOptionsRelations,
 } from 'typeorm';
 import { IDatabaseRepository } from './interfaces/database.repository.interface';
+import { NotFoundException } from '@nestjs/common';
 
 export class DatabaseRepository<T> implements IDatabaseRepository<T> {
   constructor(private readonly repository: Repository<T>) {}
@@ -43,7 +44,7 @@ export class DatabaseRepository<T> implements IDatabaseRepository<T> {
     } as unknown as FindOptionsWhere<T>);
 
     if (!existingEntity) {
-      throw new Error('Entidade não encontrada');
+      throw new NotFoundException('Entidade não encontrada');
     }
 
     await this.repository.save({ ...existingEntity, ...entity });

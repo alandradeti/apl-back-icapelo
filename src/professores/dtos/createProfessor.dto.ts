@@ -3,7 +3,6 @@ import {
   IsNotEmpty,
   IsOptional,
   IsString,
-  IsUUID,
   ValidateNested,
 } from 'class-validator';
 import { IProva } from 'src/provas/entities/interfaces/prova.entity.interface';
@@ -29,28 +28,24 @@ export class CreateProfessorDto {
     description: 'ID do usuário relacionado ao professor',
     example: {
       id: '550e8400-e29b-41d4-a716-446655440001',
-      nome: 'João',
-      email: 'Jx6b5@example.com',
-      senha: 'Abc123@',
-      tipo: 'PROFESSOR',
     },
     required: true,
   })
   usuario: IUsuario;
 
-  @IsNotEmpty()
+  @IsOptional()
   @ApiProperty({
     description: 'ID da matéria relacionada à pergunta',
     example: [{ id: 'af67065b-23c0-4ee4-ac83-79a8dcfe284d' }],
-    required: true,
+    required: false,
   })
-  materias: IMateria[];
+  materias?: IMateria[];
 
   @IsOptional()
   @ApiProperty({
     description: 'IDs das turmas relacionadas à pergunta',
     example: [{ id: 'af67065b-23c0-4ee4-ac83-79a8dcfe283a' }],
-    required: true,
+    required: false,
   })
   turmas?: ITurma[];
 
@@ -58,7 +53,7 @@ export class CreateProfessorDto {
   @ApiProperty({
     description: 'IDs das provas relacionadas ao professor',
     example: [{ id: 'af67065b-23c0-4ee4-ac83-79a8dcfe283c' }],
-    required: true,
+    required: false,
   })
   provas?: IProva[];
 }

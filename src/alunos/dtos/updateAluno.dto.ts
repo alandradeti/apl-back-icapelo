@@ -16,10 +16,6 @@ export class UpdateAlunoDto extends PartialType(CreateAlunoDto) {
     description: 'ID do usuário relacionado ao aluno',
     example: {
       id: '550e8400-e29b-41d4-a716-446655440000',
-      nome: 'João',
-      email: 'Jx6b5@example.com',
-      senha: 'Abc123@',
-      tipo: 'ALUNO',
     },
     required: true,
   })
