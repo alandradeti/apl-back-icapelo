@@ -24,8 +24,8 @@ export class Aluno extends DatabaseEntity implements IAluno {
   matricula: string;
 
   @OneToOne(() => Usuario, (usuario) => usuario.aluno, {
-    cascade: true,
     nullable: false,
+    onDelete: 'CASCADE',
   })
   @JoinColumn()
   usuario: Usuario;

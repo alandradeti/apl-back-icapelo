@@ -1,19 +1,10 @@
-import {
-  Entity,
-  Column,
-  CreateDateColumn,
-  UpdateDateColumn,
-  OneToOne,
-  JoinColumn,
-} from 'typeorm';
+import { Entity, Column, OneToOne, JoinColumn } from 'typeorm';
 import { TipoUsuario } from 'src/usuarios/enums/usuario.enum';
 import { IsEmail } from 'class-validator';
 import { IUsuario } from './interfaces/usuario.entity.interface';
 import { Aluno } from 'src/alunos/entities/aluno.entity';
 import { Professor } from 'src/professores/entities/professor.entity';
 import { DatabaseEntity } from 'src/database/entities/database.entity';
-import { IProfessor } from 'src/professores/entities/interfaces/professor.entity.interface';
-import { IAluno } from 'src/alunos/entities/interfaces/aluno.entity.interface';
 
 @Entity('usuario')
 export class Usuario extends DatabaseEntity implements IUsuario {
@@ -50,13 +41,13 @@ export class Usuario extends DatabaseEntity implements IUsuario {
 
   @OneToOne(() => Aluno, (aluno) => aluno.usuario, {
     nullable: true,
-    onDelete: 'CASCADE',
+    cascade: ['insert', 'update'],
   })
   aluno?: Aluno;
 
   @OneToOne(() => Professor, (professor) => professor.usuario, {
     nullable: true,
-    onDelete: 'CASCADE',
+    cascade: ['insert', 'update'],
   })
   professor?: Professor;
 }
