@@ -41,8 +41,12 @@ export class NotaRepository extends DatabaseRepository<Nota> {
       .getMany();
   }
 
-  async getMediaAlunoPorPeriodo(alunoId: string, periodoId: string): Promise<number | null> {
-    const resultado = await this.notaRepository.createQueryBuilder('nota')
+  async getMediaAlunoPorPeriodo(
+    alunoId: string,
+    periodoId: string,
+  ): Promise<number | null> {
+    const resultado = await this.notaRepository
+      .createQueryBuilder('nota')
       .select('AVG(nota.nota)', 'media')
       .innerJoin('nota.prova', 'prova')
       .innerJoin('prova.periodoAvaliativo', 'periodo')
@@ -53,8 +57,12 @@ export class NotaRepository extends DatabaseRepository<Nota> {
     return resultado?.media ? parseFloat(resultado.media) : null;
   }
 
-  async getMediaTurmaPorPeriodo(turmaId: string, periodoId: string): Promise<number | null> {
-    const resultado = await this.notaRepository.createQueryBuilder('nota')
+  async getMediaTurmaPorPeriodo(
+    turmaId: string,
+    periodoId: string,
+  ): Promise<number | null> {
+    const resultado = await this.notaRepository
+      .createQueryBuilder('nota')
       .select('AVG(nota.nota)', 'media')
       .innerJoin('nota.aluno', 'aluno')
       .innerJoin('aluno.turmas', 'turma')
