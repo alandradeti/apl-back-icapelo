@@ -1,5 +1,4 @@
 import { DeepPartial, FindOptionsRelations } from 'typeorm';
-import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
 
 export interface IDatabaseRepository<T> {
   findAll(
