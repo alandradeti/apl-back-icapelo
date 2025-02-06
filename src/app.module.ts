@@ -16,6 +16,7 @@ import { RespostaModule } from './respostas/resposta.module';
 import { CorrecaoModule } from './correcoes/correcao.module';
 import { MontarProvaModule } from './montarProvas/montarProva.module';
 import { PrometheusModule } from '@willsoto/nestjs-prometheus';
+import { RelatorioModule } from './relatorios/relatorio.module';
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { PrometheusModule } from '@willsoto/nestjs-prometheus';
     NotaModule,
     CorrecaoModule,
     MontarProvaModule,
+    RelatorioModule,
   ],
   controllers: [AppController],
   providers: [AppService],
