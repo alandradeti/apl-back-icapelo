@@ -57,4 +57,12 @@ export class NotaService {
   async delete(id: string): Promise<void> {
     await this.notaRepository.delete(id);
   }
+
+  async getMediaPorPeriodo(alunoId: string, periodoId): Promise<number | null> {
+    return await this.notaRepository.getMediaAlunoPorPeriodo(alunoId, periodoId);
+  }
+
+  async getMediaPorTurmaPeriodo(turmaId: string, periodoId): Promise<number | null> {
+    return await this.notaRepository.getMediaTurmaPorPeriodo(turmaId, periodoId);
+  }
 }
