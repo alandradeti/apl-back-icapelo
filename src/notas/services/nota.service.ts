@@ -60,7 +60,7 @@ export class NotaService {
 
   async getMediaAlunoPorPeriodo(
     alunoId: string,
-    periodoId,
+    periodoId: string,
   ): Promise<number | null> {
     return await this.notaRepository.getMediaAlunoPorPeriodo(
       alunoId,
@@ -68,9 +68,9 @@ export class NotaService {
     );
   }
 
-  async getMediaPorTurmaPeriodo(
+  async getMediaTurmaPorPeriodo(
     turmaId: string,
-    periodoId,
+    periodoId: string,
   ): Promise<number | null> {
     return await this.notaRepository.getMediaTurmaPorPeriodo(
       turmaId,

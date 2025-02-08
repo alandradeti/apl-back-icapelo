@@ -94,10 +94,10 @@ export class RelatorioController {
     type: Number,
   })
   @Get('media/turma/:turmaId/:periodoId')
-  async getMediaPorTurmaPeriodo(
+  async obterMediaTurmaPorPeriodo(
     @Param('turmaId') turmaId: string,
     @Param('periodoId') periodoId: string,
   ): Promise<number | null> {
-    return this.notaService.getMediaPorTurmaPeriodo(turmaId, periodoId);
+    return this.notaService.getMediaTurmaPorPeriodo(turmaId, periodoId);
   }
 }
